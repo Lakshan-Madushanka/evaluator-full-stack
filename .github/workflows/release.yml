@@ -1,0 +1,71 @@
+name: Release a new version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  changelog:
+    name: Generate changelog for version ${{inputs.version}}
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      notes: ${{ steps.git-cliff.outputs.content }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create the relevant tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{inputs.version}}
+          tag_exists_error: false
+
+      - name: Generate changelog
+        id: git-cliff
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --latest --verbose
+        env:
+          GIT_CLIFF_PREPEND: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Commit CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update CHANGELOG
+          branch: ${{ github.head_ref }}
+
+  release:
+    needs: changelog
+
+    name: Release ${{inputs.version}}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract release notes
+        id: extract-release-notes
+        run: |
+          NOTES=$(echo -e "${{ needs.changelog.outputs.notes }}" | awk '/###/ {flag=1} flag')
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        run: gh release create ${{ inputs.version }} --notes "${{steps.extract-release-notes.outputs.notes}}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
