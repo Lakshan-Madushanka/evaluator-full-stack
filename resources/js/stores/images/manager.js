@@ -15,7 +15,6 @@ export const useImagesStore = defineStore('images', () => {
 
     try {
       const response = await imageManagerRequests.getImagesRequest(id, type)
-      console.log(response)
       images.value = response.data
     } catch (data) {
       //
@@ -24,13 +23,12 @@ export const useImagesStore = defineStore('images', () => {
     }
   }
 
-  async function chageOrderOfImages(type, ids) {
+  async function changeOrderOfImages(type, ids) {
     resetStatus(true, 'changing', {})
 
     try {
       await imageManagerRequests.getChangeOrderOfImagesRequest(type, ids)
 
-      //const images =
       status.value = 'changed'
     } catch (data) {
       //
@@ -46,7 +44,6 @@ export const useImagesStore = defineStore('images', () => {
     try {
       await imageManagerRequests.getRemoveImagesRequest(type, ids)
 
-      //const images =
       status.value = 'removed'
     } catch (data) {
       //
@@ -66,7 +63,7 @@ export const useImagesStore = defineStore('images', () => {
     status,
     images,
     getImages,
-    chageOrderOfImages,
+    changeOrderOfImages,
     removeImages
   }
 })
