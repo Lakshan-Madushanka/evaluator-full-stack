@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/{any}', function () {
+    return view('index'); // or your main blade file that loads Vue
+})->where('any', '^(?!api)(?!upload).*$');
