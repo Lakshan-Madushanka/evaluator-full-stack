@@ -1,0 +1,95 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.2",
+        "haruncpi/laravel-id-generator": "^1.1",
+        "laravel/framework": "^12.0",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.7",
+        "protonemedia/laravel-xss-protection": "^1.9",
+        "spatie/laravel-json-api-paginate": "^1.12",
+        "spatie/laravel-medialibrary": "^11.0",
+        "spatie/laravel-query-builder": "^6.3",
+        "spatie/laravel-ray": "^1.31",
+        "timacdonald/json-api": "^v1.0.0-beta.4",
+        "vinkla/hashids": "^13.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.2",
+        "fakerphp/faker": "^1.9.1",
+        "larastan/larastan": "^3.6",
+        "laravel/boost": "^1.0",
+        "laravel/pint": "^1.9.0",
+        "laravel/sail": "^1.0.1",
+        "laravel/telescope": "^5.5",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^8.1",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "spatie/laravel-ignition": "^2.0",
+        "spatie/laravel-web-tinker": "^1.8",
+        "worksome/request-factories": "^3.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "Database\\Data\\": "database/data/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "format": [
+          "./vendor/bin/pint"
+        ],
+        "analyze": [
+            "./vendor/bin/phpstan analyse"
+        ],
+        "pest": [
+          "./vendor/bin/pest --stop-on-failure --parallel"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "laravel/telescope"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "process-timeout": 1000
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
