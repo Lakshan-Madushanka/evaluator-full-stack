@@ -1,0 +1,40 @@
+@import './base.css';
+
+html {
+  font-size: 14px;
+}
+
+#app {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: rgb(9, 9, 9);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: var(--p-primary-100);
+  }
+}
+
+/* override / cancel when dark mode is active */
+.dark a:hover,
+.dark a {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.ql-code-block-container {
+  background-color: #f0f0f0;
+  padding: 2px 4px;
+}
+
+.v-sidebar-menu .vsm--mobile-bg {
+  background-color: rgb(44, 44, 44) !important;
+}
