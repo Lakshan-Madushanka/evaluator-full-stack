@@ -2,6 +2,8 @@
 /public/build
 /public/hot
 /public/storage
+/public/storage/vendor/telescope
+/public/storage/vendor/web-tinker
 /storage/*.key
 /vendor
 .env
@@ -25,3 +27,5 @@ _ide_helper.php
 /api
 /.vercelignore
 /vercel.json
+public/null
+public/hot
