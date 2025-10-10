@@ -30,3 +30,7 @@ _ide_helper.php
 public/null
 public/hot
 .vite
+git-cliff*
+bin
+*.sqlite
+coverage
