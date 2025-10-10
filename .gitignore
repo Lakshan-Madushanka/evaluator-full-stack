@@ -2,8 +2,8 @@
 /public/build
 /public/hot
 /public/storage
-/public/vendor/telescope/
-/public/vendor/web-tinker/
+/public/vendor/telescope
+/public/vendor/web-tinker
 /storage/*.key
 /vendor
 .env
