@@ -1,14 +1,11 @@
 <?php
 
 use App\Enums\Role;
-use App\Models\Questionnaire;
-use App\Models\UserQuestionnaire;
 use Laravel\Sanctum\Sanctum;
 use Tests\Repositories\TeamRepository;
 use Tests\Repositories\UserRepository;
 
 use function Pest\Laravel\deleteJson;
-use function Pest\Laravel\postJson;
 
 it('return 401 response non-login users ', function () {
     $response = deleteJson(route('api.v1.administrative.teams.questionnaires.detach', [

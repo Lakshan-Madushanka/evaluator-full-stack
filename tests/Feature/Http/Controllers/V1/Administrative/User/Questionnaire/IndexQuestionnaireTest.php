@@ -30,13 +30,8 @@ test('admin can obtain all user questionnaires', function () {
 
     $user = UserRepository::getRandomUser();
 
-    $user = User::findOrFail(52);
-
-    DB::enableQueryLog();
     $response = getJson(route('api.v1.administrative.users.questionnaires.index', ['user' => $user->hash_id]));
 
-    dd($response->json('data'));
-    dd(DB::getQueryLog());
     $response->assertOk();
 })->group('administrative/users/questionnaires/index');
 
