@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ref, toRefs, reactive, watch, onBeforeMount, markRaw } from 'vue'
+import { markRaw, onBeforeMount, reactive, ref, toRefs, watch } from 'vue'
 
 import { useRoute } from 'vue-router'
 
@@ -41,8 +41,6 @@ import { useAppStore } from '@/stores/app'
 import { useAuthStore } from '@/stores/auth'
 import Divider from 'primevue/divider'
 import SessionTimeoutMessage from '@/components/SessionTimeoutMessage.vue'
-
-import { isDarkMode } from '@/helpers'
 
 export default {
   components: { SidebarMenu, NavBar, SessionTimeoutMessage },
