@@ -9,9 +9,9 @@ use function Pest\Laravel\deleteJson;
 
 it('return 401 response non-login users ', function () {
     $response = deleteJson(route('api.v1.administrative.teams.questionnaires.detach', [
-            'team' => 'abc',
-            'questionnaire' => 'abc'
-        ])
+        'team' => 'abc',
+        'questionnaire' => 'abc',
+    ])
     );
     $response->assertUnauthorized();
 })->group('administrative/team/questionnaire/detach');
@@ -21,9 +21,9 @@ it('return 404 response regular login users', function () {
     Sanctum::actingAs($user);
 
     $response = deleteJson(route('api.v1.administrative.teams.questionnaires.detach', [
-            'team' => 'abc',
-            'questionnaire' => 'abc'
-        ])
+        'team' => 'abc',
+        'questionnaire' => 'abc',
+    ])
     );
     $response->assertNotFound();
 })->group('administrative/team/questionnaire/detach');
@@ -39,7 +39,6 @@ test('it throws 422 error when trying to detach already attempted questionnaire'
 
     $questionnaire->attempts = 1;
     $questionnaire->save();
-
 
     $response = deleteJson(
         route('api.v1.administrative.teams.questionnaires.detach', [

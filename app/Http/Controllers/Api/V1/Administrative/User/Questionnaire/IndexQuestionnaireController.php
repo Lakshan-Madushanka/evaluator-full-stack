@@ -67,7 +67,7 @@ class IndexQuestionnaireController extends Controller
                 AllowedSort::field('created_at', 'user_questionnaire.created_at'),
             ])
             ->jsonPaginate();
-        
+
         return UserQuestionnaireResource::collection($questionnaires);
     }
 }
