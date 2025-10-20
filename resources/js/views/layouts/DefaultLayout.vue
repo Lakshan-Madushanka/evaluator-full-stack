@@ -3,7 +3,7 @@
   <NavBar />
 
   <router-view
-    class="dark:bg-[size:20px_20px] dark:bg-slate-950 dark:[&>div]:inset-0 dark:[&>div]:bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] dark:[&>div]:bg-[size:14px_24px]"
+    class="min-h-[calc(100vh-3.7rem)] dark:bg-[size:20px_20px] dark:bg-slate-950 dark:[&>div]:inset-0 dark:[&>div]:bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] dark:[&>div]:bg-[size:14px_24px]"
     :style="bgStyle"
   ></router-view>
 </template>
