@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-[calc(100vh-3.6rem)] flex items-center justify-center">
+  <div class="flex items-center justify-center">
     <div class="mb-8 p-4 md:p-8 lg:p-16">
       <h1 class="text-6xl mb-6 font-bold">Evaluator</h1>
       <div class="text-2xl space-y-6">
