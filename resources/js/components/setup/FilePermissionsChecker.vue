@@ -14,9 +14,11 @@
         <i v-else class="pi pi-times-circle text-red-600 !text-2xl"></i>
       </p>
       <ProgressSpinner v-if="setupStore.data.filePermissions.loading" />
-      <table v-else class="table-auto w-full text-left min-w-max text-slate-800">
+      <table v-else class="table-auto w-full text-left min-w-max text-slate-800 dark:text-white">
         <thead>
-          <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
+          <tr
+            class="text-slate-500 dark:text-white dark:border-slate-950 border-b border-slate-300 bg-slate-50 dark:bg-slate-900"
+          >
             <th class="p-4">Path</th>
             <th class="p-4">Current Permission</th>
             <th class="p-4">Required Permission</th>

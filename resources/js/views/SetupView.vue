@@ -1,6 +1,6 @@
 <template>
   <div class="mt-6 flex justify-center">
-    <div class="max-w-4xl w-full">
+    <div class="max-w-7xl w-full">
       <Card>
         <template #title>Setup Wizard</template>
         <template #content>
@@ -21,6 +21,12 @@
               </Step>
               <Step value="4">
                 <span>Env Check</span>
+                &nbsp;
+                <i v-if="isEnvPassed()" class="pi pi-check text-green-600 !text-lg" />
+                <i v-if="isEnvFailed()" class="pi pi-times text-red-600 !text-lg" />
+              </Step>
+              <Step value="5">
+                <span>DB Check</span>
                 &nbsp;
                 <i v-if="isEnvPassed()" class="pi pi-check text-green-600 !text-lg" />
                 <i v-if="isEnvFailed()" class="pi pi-times text-red-600 !text-lg" />
@@ -106,6 +112,30 @@
                     icon="pi pi-arrow-right"
                     iconPos="right"
                     @click="activateCallback('4')"
+                  />
+                </div>
+              </StepPanel>
+              <StepPanel v-slot="{ active, activateCallback }" value="5">
+                <div class="mt-4">
+                  <div v-if="hasCompletedPreviousSteps(5) && active">
+                    <!--                    <EnvChecker :is-previous-steps-passed="hasCompletedPreviousSteps(5)" />-->
+                  </div>
+                  <Message v-else severity="error"
+                    >Please complete previous steps to continue.</Message
+                  >
+                </div>
+                <div class="flex pt-6 mt-4 justify-between">
+                  <PrimeButton
+                    label="Back"
+                    severity="secondary"
+                    icon="pi pi-arrow-left"
+                    @click="activateCallback('4')"
+                  />
+                  <PrimeButton
+                    label="Next"
+                    icon="pi pi-arrow-right"
+                    iconPos="right"
+                    @click="activateCallback('6')"
                   />
                 </div>
               </StepPanel>

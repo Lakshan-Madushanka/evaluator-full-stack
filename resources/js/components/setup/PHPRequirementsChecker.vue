@@ -60,9 +60,11 @@
 
       <ProgressSpinner v-if="setupStore.data.php.extensions.loading" />
       <div v-else class="max-h-[30rem] overflow-auto">
-        <table class="table-auto h-full w-full text-left min-w-max overflow-auto text-slate-800">
+        <table class="table-auto w-full text-left min-w-max text-slate-800 dark:text-white">
           <thead>
-            <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
+            <tr
+              class="text-slate-500 dark:text-white dark:border-slate-950 border-b border-slate-300 bg-slate-50 dark:bg-slate-900"
+            >
               <th class="p-4">Extension</th>
               <th class="p-4">Installed</th>
             </tr>

@@ -29,9 +29,11 @@
               These values are used throughout the application. Please review and update them if
               they are incorrect.
             </Message>
-            <table class="table-auto w-full text-left min-w-max text-slate-800">
+            <table class="table-auto w-full text-left min-w-max text-slate-800 dark:text-white">
               <thead>
-                <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
+                <tr
+                  class="text-slate-500 dark:text-white dark:border-slate-950 border-b border-slate-300 bg-slate-50 dark:bg-slate-900"
+                >
                   <th class="p-4">Key</th>
                   <th class="p-4">Value</th>
                   <th class="p-4">Meaning</th>
