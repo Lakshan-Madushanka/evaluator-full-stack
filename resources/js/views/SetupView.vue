@@ -19,6 +19,12 @@
                 <i v-if="isFilePermissionPassed()" class="pi pi-check text-green-600 !text-lg" />
                 <i v-if="isFilePermissionFailed()" class="pi pi-times text-red-600 !text-lg" />
               </Step>
+              <Step value="4">
+                <span>Env Check</span>
+                &nbsp;
+                <i v-if="isEnvPassed()" class="pi pi-check text-green-600 !text-lg" />
+                <i v-if="isEnvFailed()" class="pi pi-times text-red-600 !text-lg" />
+              </Step>
             </StepList>
             <StepPanels>
               <StepPanel v-slot="{ activateCallback }" value="1">
@@ -64,12 +70,42 @@
                     >Please complete previous steps to continue.</Message
                   >
                 </div>
-                <div class="pt-6">
+                <div class="flex pt-6 mt-4 justify-between">
                   <PrimeButton
                     label="Back"
                     severity="secondary"
                     icon="pi pi-arrow-left"
                     @click="activateCallback('2')"
+                  />
+                  <PrimeButton
+                    label="Next"
+                    icon="pi pi-arrow-right"
+                    iconPos="right"
+                    @click="activateCallback('4')"
+                  />
+                </div>
+              </StepPanel>
+              <StepPanel v-slot="{ active, activateCallback }" value="4">
+                <div class="mt-4">
+                  <div v-if="hasCompletedPreviousSteps(4) && active">
+                    <EnvChecker :is-previous-steps-passed="hasCompletedPreviousSteps(4)" />
+                  </div>
+                  <Message v-else severity="error"
+                    >Please complete previous steps to continue.</Message
+                  >
+                </div>
+                <div class="flex pt-6 mt-4 justify-between">
+                  <PrimeButton
+                    label="Back"
+                    severity="secondary"
+                    icon="pi pi-arrow-left"
+                    @click="activateCallback('3')"
+                  />
+                  <PrimeButton
+                    label="Next"
+                    icon="pi pi-arrow-right"
+                    iconPos="right"
+                    @click="activateCallback('4')"
                   />
                 </div>
               </StepPanel>
@@ -95,6 +131,7 @@ import PHPRequirementsChecker from '@/components/setup/PHPRequirementsChecker.vu
 
 import { useSetupStore } from '@/stores/setup'
 import FilePermissionsChecker from '@/components/setup/FilePermissionsChecker.vue'
+import EnvChecker from '@/components/setup/EnvChecker.vue'
 
 const setupStore = useSetupStore()
 
@@ -118,12 +155,22 @@ function isFilePermissionFailed() {
   return !setupStore.data.filePermissions.is_passed && setupStore.data.filePermissions.isLoaded
 }
 
+function isEnvPassed() {
+  return setupStore.data.env.is_passed && setupStore.data.env.isLoaded
+}
+
+function isEnvFailed() {
+  return !setupStore.data.env.is_passed && setupStore.data.env.isLoaded
+}
+
 function hasCompletedPreviousSteps(step) {
   switch (step) {
     case 3:
       return isRequirementsPassed()
     case 4:
       return isRequirementsPassed() && isFilePermissionPassed()
+    case 5:
+      return isRequirementsPassed() && isFilePermissionPassed() && isEnvPassed()
   }
 }
 </script>

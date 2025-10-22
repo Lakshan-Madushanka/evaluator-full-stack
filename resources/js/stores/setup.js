@@ -21,6 +21,13 @@ export const useSetupStore = defineStore('setup', () => {
       loading: false,
       isLoaded: false,
       is_passed: false
+    },
+    env: {
+      app: {},
+      is_exists: false,
+      loading: false,
+      isLoaded: false,
+      is_passed: false
     }
   })
 
@@ -79,6 +86,27 @@ export const useSetupStore = defineStore('setup', () => {
       data.filePermissions.loading = false
     }
   }
+  /**
+   * ENV Check
+   */
+  async function checkEnv() {
+    resetStatus(true, '', {})
+    data.env.loading = true
+    errors.value = {}
+
+    try {
+      const response = await setupRequests.checkEnv()
+      data.env.is_exists = response.is_exists
+      data.env.is_passed = response.is_passed
+      data.env.app = response.app
+      data.env.isLoaded = true
+    } catch (data) {
+      console.error(data)
+    } finally {
+      loading.value = false
+      data.env.loading = false
+    }
+  }
 
   function resetStatus(isLoading, statusValue) {
     loading.value = isLoading
@@ -92,6 +120,7 @@ export const useSetupStore = defineStore('setup', () => {
     data,
     checkPHPVersion,
     checkPHPExtensions,
-    checkFilePermissions
+    checkFilePermissions,
+    checkEnv
   }
 })

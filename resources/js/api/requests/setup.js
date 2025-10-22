@@ -19,3 +19,10 @@ export async function checkPHPExtensionsRequest() {
 export async function checkFilePermissions() {
   return await http.get(setupRoutes.file_permissions_check)
 }
+
+/**
+ * ENV Check
+ */
+export async function checkEnv() {
+  return await http.get(setupRoutes.env_check)
+}

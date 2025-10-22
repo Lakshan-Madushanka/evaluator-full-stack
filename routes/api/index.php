@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Setup\CheckEnvController;
 use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
 use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,9 @@ Route::name('setup.')->prefix('setup')->group(function () {
     * File Permissions Check
     */
    Route::get('/check-file-permissions', CheckFilePermissionsController::class)->name('check-file-permissions');
+
+    /**
+     * Env Check
+     */
+    Route::get('/check-env', CheckEnvController::class)->name('check-env');
 });

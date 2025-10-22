@@ -12,3 +12,8 @@ export const php_extensions_check = `${base}check-php-extensions`
  * File Permissions
  */
 export const file_permissions_check = `${base}check-file-permissions`
+
+/**
+ * ENV
+ */
+export const env_check = `${base}check-env`
