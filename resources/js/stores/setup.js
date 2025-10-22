@@ -15,9 +15,18 @@ export const useSetupStore = defineStore('setup', () => {
       version: { current: '', minimum: '', supported: false, loading: false },
       extensions: { list: {}, is_passed: false, loading: false },
       isLoaded: false
+    },
+    filePermissions: {
+      list: {},
+      loading: false,
+      isLoaded: false,
+      is_passed: false
     }
   })
 
+  /**
+   * PHP Requirements Check
+   */
   async function checkPHPVersion() {
     resetStatus(true, '', {})
     data.php.version.loading = true
@@ -50,6 +59,27 @@ export const useSetupStore = defineStore('setup', () => {
     }
   }
 
+  /**
+   * File Permissions Check
+   */
+  async function checkFilePermissions() {
+    resetStatus(true, '', {})
+    data.filePermissions.loading = true
+    errors.value = {}
+
+    try {
+      const response = await setupRequests.checkFilePermissions()
+      data.filePermissions.list = response.permissions
+      data.filePermissions.is_passed = !response.hasErrors
+      data.filePermissions.isLoaded = true
+    } catch (data) {
+      console.error(data)
+    } finally {
+      loading.value = false
+      data.filePermissions.loading = false
+    }
+  }
+
   function resetStatus(isLoading, statusValue) {
     loading.value = isLoading
     status.value = statusValue
@@ -61,6 +91,7 @@ export const useSetupStore = defineStore('setup', () => {
     errors,
     data,
     checkPHPVersion,
-    checkPHPExtensions
+    checkPHPExtensions,
+    checkFilePermissions
   }
 })

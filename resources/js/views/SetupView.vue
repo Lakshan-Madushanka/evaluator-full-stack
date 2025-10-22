@@ -13,7 +13,12 @@
                 <i v-if="isRequirementsPassed()" class="pi pi-check text-green-600 !text-lg" />
                 <i v-if="isRequirementsFailed()" class="pi pi-times text-red-600 !text-lg" />
               </Step>
-              <Step value="3"> Permissions </Step>
+              <Step value="3">
+                <span>Permissions</span>
+                &nbsp;
+                <i v-if="isFilePermissionPassed()" class="pi pi-check text-green-600 !text-lg" />
+                <i v-if="isFilePermissionFailed()" class="pi pi-times text-red-600 !text-lg" />
+              </Step>
             </StepList>
             <StepPanels>
               <StepPanel v-slot="{ activateCallback }" value="1">
@@ -48,13 +53,12 @@
                   />
                 </div>
               </StepPanel>
-              <StepPanel v-slot="{ activateCallback }" value="3">
+              <StepPanel v-slot="{ active, activateCallback }" value="3">
                 <div class="mt-4">
-                  <div
-                    v-if="hasCompletedPreviousSteps(3)"
-                    class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
-                  >
-                    Content III
+                  <div v-if="hasCompletedPreviousSteps(3) && active">
+                    <FilePermissionsChecker
+                      :is-previous-steps-passed="hasCompletedPreviousSteps(3)"
+                    />
                   </div>
                   <Message v-else severity="error"
                     >Please complete previous steps to continue.</Message
@@ -90,6 +94,7 @@ import Message from 'primevue/message'
 import PHPRequirementsChecker from '@/components/setup/PHPRequirementsChecker.vue'
 
 import { useSetupStore } from '@/stores/setup'
+import FilePermissionsChecker from '@/components/setup/FilePermissionsChecker.vue'
 
 const setupStore = useSetupStore()
 
@@ -105,10 +110,20 @@ function isRequirementsFailed() {
   return !isRequirementsPassed() && setupStore.data.php.isLoaded
 }
 
+function isFilePermissionPassed() {
+  return setupStore.data.filePermissions.is_passed && setupStore.data.filePermissions.isLoaded
+}
+
+function isFilePermissionFailed() {
+  return !setupStore.data.filePermissions.is_passed && setupStore.data.filePermissions.isLoaded
+}
+
 function hasCompletedPreviousSteps(step) {
   switch (step) {
     case 3:
       return isRequirementsPassed()
+    case 4:
+      return isRequirementsPassed() && isFilePermissionPassed()
   }
 }
 </script>

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    /**
+     * PHP Requirements
+     */
   'php_requirements' => [
       'min_version' => '8.0.0',
       'extensions' => [
@@ -22,4 +25,13 @@ return [
           'xml',
       ]
   ],
+
+    /**
+     * File Permissions
+     */
+    'file_permissions' => [
+        'storage/framework/' => '775',
+        'storage/logs/'      => '775',
+        'bootstrap/cache/'   => '775',
+    ],
 ];
