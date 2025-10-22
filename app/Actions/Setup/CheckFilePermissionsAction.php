@@ -2,7 +2,7 @@
 
 namespace App\Actions\Setup;
 
-class CheckFilePermissions
+class CheckFilePermissionsAction
 {
     private array $permissions = ['permissions' => [], 'hasErrors' => null];
 

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Setup;
 
-class CheckPHPVersion
+class CheckPHPVersionAction
 {
     public function execute(): array
     {

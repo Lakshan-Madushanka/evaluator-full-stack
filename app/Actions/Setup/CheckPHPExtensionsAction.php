@@ -2,7 +2,7 @@
 
 namespace App\Actions\Setup;
 
-class CheckPHPExtensions
+class CheckPHPExtensionsAction
 {
     public function execute(): array
     {
