@@ -59,25 +59,27 @@
       </p>
 
       <ProgressSpinner v-if="setupStore.data.php.extensions.loading" />
-      <table v-else class="table-auto w-full text-left min-w-max text-slate-800">
-        <thead>
-          <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
-            <th class="p-4">Extension</th>
-            <th class="p-4">Installed</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(status, extension) in setupStore.data.php.extensions.list">
-            <td class="p-4">{{ extension }}</td>
-            <td v-if="status" class="p-4">
-              <i class="pi pi-check-circle !text-xl text-green-600"></i>
-            </td>
-            <td v-else class="p-4">
-              <i class="pi pi-times-circle !text-xl text-red-600"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-else class="max-h-[30rem] overflow-auto">
+        <table class="table-auto h-full w-full text-left min-w-max overflow-auto text-slate-800">
+          <thead>
+            <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
+              <th class="p-4">Extension</th>
+              <th class="p-4">Installed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(status, extension) in setupStore.data.php.extensions.list">
+              <td class="p-4">{{ extension }}</td>
+              <td v-if="status" class="p-4">
+                <i class="pi pi-check-circle !text-xl text-green-600"></i>
+              </td>
+              <td v-else class="p-4">
+                <i class="pi pi-times-circle !text-xl text-red-600"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
