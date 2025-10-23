@@ -28,8 +28,8 @@
               <Step value="5">
                 <span>DB Check</span>
                 &nbsp;
-                <i v-if="isEnvPassed()" class="pi pi-check text-green-600 !text-lg" />
-                <i v-if="isEnvFailed()" class="pi pi-times text-red-600 !text-lg" />
+                <i v-if="isDBPassed()" class="pi pi-check text-green-600 !text-lg" />
+                <i v-if="isDBFailed()" class="pi pi-times text-red-600 !text-lg" />
               </Step>
             </StepList>
             <StepPanels>
@@ -118,7 +118,7 @@
               <StepPanel v-slot="{ active, activateCallback }" value="5">
                 <div class="mt-4">
                   <div v-if="hasCompletedPreviousSteps(5) && active">
-                    <!--                    <EnvChecker :is-previous-steps-passed="hasCompletedPreviousSteps(5)" />-->
+                    <DBChecker :is-previous-steps-passed="hasCompletedPreviousSteps(5)" />
                   </div>
                   <Message v-else severity="error"
                     >Please complete previous steps to continue.</Message
@@ -162,6 +162,7 @@ import PHPRequirementsChecker from '@/components/setup/PHPRequirementsChecker.vu
 import { useSetupStore } from '@/stores/setup'
 import FilePermissionsChecker from '@/components/setup/FilePermissionsChecker.vue'
 import EnvChecker from '@/components/setup/EnvChecker.vue'
+import DBChecker from '@/components/setup/DBChecker.vue'
 
 const setupStore = useSetupStore()
 
@@ -191,6 +192,14 @@ function isEnvPassed() {
 
 function isEnvFailed() {
   return !setupStore.data.env.is_passed && setupStore.data.env.isLoaded
+}
+
+function isDBPassed() {
+  return setupStore.data.db.is_passed && setupStore.data.db.isLoaded
+}
+
+function isDBFailed() {
+  return !setupStore.data.db.is_passed && setupStore.data.db.isLoaded
 }
 
 function hasCompletedPreviousSteps(step) {

@@ -17,3 +17,10 @@ export const file_permissions_check = `${base}check-file-permissions`
  * ENV
  */
 export const env_check = `${base}check-env`
+
+/**
+ * DB
+ */
+export const get_db_info = `${base}db/get-info`
+export const check_db_connection = `${base}db/check-connection`
+export const migrate_db = `${base}db/migrate`

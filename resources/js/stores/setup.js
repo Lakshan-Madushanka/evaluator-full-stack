@@ -28,6 +28,16 @@ export const useSetupStore = defineStore('setup', () => {
       loading: false,
       isLoaded: false,
       is_passed: false
+    },
+    db: {
+      info: { name: '', connection: '', config: {} },
+      connection: { status: '', has_database_created: '', errors: '' },
+      status: { checkingConnection: false, migrating: false },
+      loadedStatus: { checkConnection: false },
+      is_exists: false,
+      loading: false,
+      isLoaded: false,
+      is_passed: false
     }
   })
 
@@ -86,6 +96,7 @@ export const useSetupStore = defineStore('setup', () => {
       data.filePermissions.loading = false
     }
   }
+
   /**
    * ENV Check
    */
@@ -108,6 +119,60 @@ export const useSetupStore = defineStore('setup', () => {
     }
   }
 
+  /**
+   * DB Check
+   */
+  async function getDBInfo() {
+    resetStatus(true, '', {})
+    data.db.loading = true
+    errors.value = {}
+
+    try {
+      data.db.info = await setupRequests.getDBInfo()
+    } catch (data) {
+      console.error(data)
+    } finally {
+      loading.value = false
+      data.db.loading = false
+    }
+  }
+
+  async function checkDBConnection() {
+    resetStatus(true, '', {})
+    data.db.status.checkingConnection = true
+    errors.value = {}
+
+    try {
+      data.db.connection = await setupRequests.checkConnection()
+      data.db.loadedStatus.checkConnection = true
+    } catch (data) {
+      console.error(data)
+    } finally {
+      data.db.status.checkingConnection = false
+    }
+  }
+
+  async function migrateDB() {
+    resetStatus(true, '', {})
+    data.db.status.migrating = true
+    errors.value = {}
+
+    try {
+      const response = await setupRequests.migrateDB()
+      if (response.migrated_status === 0) {
+        data.db.is_passed = true
+        data.db.isLoaded = true
+      } else {
+        data.db.is_passed = false
+        data.db.isLoaded = true
+      }
+    } catch (data) {
+      console.error(data)
+    } finally {
+      data.db.status.migrating = false
+    }
+  }
+
   function resetStatus(isLoading, statusValue) {
     loading.value = isLoading
     status.value = statusValue
@@ -121,6 +186,9 @@ export const useSetupStore = defineStore('setup', () => {
     checkPHPVersion,
     checkPHPExtensions,
     checkFilePermissions,
-    checkEnv
+    checkEnv,
+    getDBInfo,
+    checkDBConnection,
+    migrateDB
   }
 })

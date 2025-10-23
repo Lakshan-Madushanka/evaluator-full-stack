@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Setup\CheckDBController;
 use App\Http\Controllers\Api\Setup\CheckEnvController;
 use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
 use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
@@ -21,4 +22,11 @@ Route::name('setup.')->prefix('setup')->group(function () {
      * Env Check
      */
     Route::get('/check-env', CheckEnvController::class)->name('check-env');
+
+    /**
+     * DB Check
+     */
+    Route::get('db/get-info', [CheckDBController::class, 'info'])->name('db.get-info');
+    Route::get('db/check-connection', [CheckDBController::class, 'checkConnection'])->name('db.check-connection');
+    Route::get('db/migrate', [CheckDBController::class, 'migrate'])->name('db.migrate');
 });

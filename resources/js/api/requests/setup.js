@@ -26,3 +26,18 @@ export async function checkFilePermissions() {
 export async function checkEnv() {
   return await http.get(setupRoutes.env_check)
 }
+
+/**
+ * DB Check
+ */
+export async function getDBInfo() {
+  return await http.get(setupRoutes.get_db_info)
+}
+
+export async function checkConnection() {
+  return await http.get(setupRoutes.check_db_connection)
+}
+
+export async function migrateDB() {
+  return await http.get(setupRoutes.migrate_db)
+}
