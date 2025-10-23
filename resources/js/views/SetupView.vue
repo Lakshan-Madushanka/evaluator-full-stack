@@ -111,7 +111,7 @@
                     label="Next"
                     icon="pi pi-arrow-right"
                     iconPos="right"
-                    @click="activateCallback('4')"
+                    @click="activateCallback('5')"
                   />
                 </div>
               </StepPanel>
