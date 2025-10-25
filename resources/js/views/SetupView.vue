@@ -6,7 +6,9 @@
         <template #content>
           <Stepper class="w-full mt-6" value="1">
             <StepList>
-              <Step value="1">Welcome</Step>
+              <Step value="1">
+                <WelcomeComponent />
+              </Step>
               <Step value="2">
                 <span>Requirements</span>
                 &nbsp;
@@ -145,7 +147,7 @@
                   />
                 </div>
               </StepPanel>
-              <StepPanel v-slot="{ active, activateCallback }" value="6">
+              <StepPanel v-slot="{ active }" value="6">
                 <div class="mt-4">
                   <div v-if="hasCompletedPreviousSteps(6) && active">
                     <AccountChecker :is-previous-steps-passed="hasCompletedPreviousSteps(6)" />
@@ -153,14 +155,6 @@
                   <Message v-else severity="error"
                     >Please complete previous steps to continue.</Message
                   >
-                </div>
-                <div class="flex pt-6 mt-4 justify-between">
-                  <PrimeButton
-                    label="Back"
-                    severity="secondary"
-                    icon="pi pi-arrow-left"
-                    @click="activateCallback('5')"
-                  />
                 </div>
               </StepPanel>
             </StepPanels>
@@ -188,6 +182,7 @@ import FilePermissionsChecker from '@/components/setup/FilePermissionsChecker.vu
 import EnvChecker from '@/components/setup/EnvChecker.vue'
 import DBChecker from '@/components/setup/DBChecker.vue'
 import AccountChecker from '@/components/setup/AccountChecker.vue'
+import WelcomeComponent from '@/components/setup/WelcomeComponent.vue'
 
 const setupStore = useSetupStore()
 
