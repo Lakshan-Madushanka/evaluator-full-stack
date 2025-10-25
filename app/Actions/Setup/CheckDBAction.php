@@ -11,7 +11,7 @@ class CheckDBAction
 
     public function execute(): int
     {
-        return Artisan::call('migrate');
+        return Artisan::call('migrate', ['--force' => true]);
     }
 
     public function getInfo(): array
