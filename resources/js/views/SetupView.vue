@@ -6,9 +6,7 @@
         <template #content>
           <Stepper class="w-full mt-6" value="1">
             <StepList>
-              <Step value="1">
-                <WelcomeComponent />
-              </Step>
+              <Step value="1"> Welcome </Step>
               <Step value="2">
                 <span>Requirements</span>
                 &nbsp;
@@ -43,11 +41,11 @@
             <StepPanels>
               <StepPanel v-slot="{ activateCallback }" value="1">
                 <div class="flex items-center justify-center flex-col mt-4">
-                  <p class="text-2xl">Welcome to Evaluator setup wizard 🙏🏻</p>
+                  <WelcomeComponent />
                 </div>
                 <div class="flex pt-6 justify-end">
                   <PrimeButton
-                    label="Next"
+                    label="Start Setup"
                     icon="pi pi-arrow-right"
                     iconPos="right"
                     @click="activateCallback('2')"
