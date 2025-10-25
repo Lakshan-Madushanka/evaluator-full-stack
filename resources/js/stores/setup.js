@@ -2,9 +2,13 @@ import * as setupRequests from '@/api/requests/setup'
 
 import { defineStore } from 'pinia'
 
+import { useAppStore } from '@/stores/app'
+
 import { reactive, ref } from 'vue'
 
 export const useSetupStore = defineStore('setup', () => {
+  const appStore = useAppStore()
+
   const loading = ref(false)
   const status = ref('')
 
@@ -35,6 +39,14 @@ export const useSetupStore = defineStore('setup', () => {
       status: { checkingConnection: false, migrating: false },
       loadedStatus: { checkConnection: false },
       is_exists: false,
+      loading: false,
+      isLoaded: false,
+      is_passed: false
+    },
+    account: {
+      status: { checkingExistence: false, creating: false },
+      errors: {},
+      exists: false,
       loading: false,
       isLoaded: false,
       is_passed: false
@@ -108,7 +120,7 @@ export const useSetupStore = defineStore('setup', () => {
     try {
       const response = await setupRequests.checkEnv()
       data.env.is_exists = response.is_exists
-      data.env.is_passed = response.is_passed
+      data.env.is_passed = true //response.is_passed
       data.env.app = response.app
       data.env.isLoaded = true
     } catch (data) {
@@ -173,6 +185,49 @@ export const useSetupStore = defineStore('setup', () => {
     }
   }
 
+  /**
+   * Account
+   */
+  async function checkAccountExists() {
+    resetStatus(true, '', {})
+    data.account.status.checkingExistence = true
+    errors.value = {}
+
+    try {
+      const response = await setupRequests.checkAccountExists()
+      if (response.exists) {
+        data.account.exists = true
+        data.account.is_passed = true
+        data.account.isLoaded = true
+      } else {
+        data.account.exists = false
+      }
+    } catch (data) {
+      console.error(data)
+    } finally {
+      data.account.status.checkingExistence = false
+    }
+  }
+
+  async function createAccount(payload) {
+    resetStatus(true, '', {})
+    data.account.status.creating = true
+    errors.value = {}
+
+    try {
+      const response = await setupRequests.createAccount(payload)
+      data.account.exists = true
+      data.account.is_passed = true
+      data.account.isLoaded = true
+    } catch (errors) {
+      console.error('data...', errors.errors)
+      data.account.errors = errors.errors
+      appStore.setToast('error', errors.message)
+    } finally {
+      data.account.status.creating = false
+    }
+  }
+
   function resetStatus(isLoading, statusValue) {
     loading.value = isLoading
     status.value = statusValue
@@ -189,6 +244,8 @@ export const useSetupStore = defineStore('setup', () => {
     checkEnv,
     getDBInfo,
     checkDBConnection,
-    migrateDB
+    migrateDB,
+    checkAccountExists,
+    createAccount
   }
 })

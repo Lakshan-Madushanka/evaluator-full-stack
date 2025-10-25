@@ -41,3 +41,14 @@ export async function checkConnection() {
 export async function migrateDB() {
   return await http.get(setupRoutes.migrate_db)
 }
+
+/**
+ * Account
+ */
+export async function checkAccountExists() {
+  return await http.get(setupRoutes.check_account_exists)
+}
+
+export async function createAccount(payload) {
+  return await http.post(setupRoutes.create_account, payload)
+}

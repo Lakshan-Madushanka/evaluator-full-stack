@@ -31,6 +31,12 @@
                 <i v-if="isDBPassed()" class="pi pi-check text-green-600 !text-lg" />
                 <i v-if="isDBFailed()" class="pi pi-times text-red-600 !text-lg" />
               </Step>
+              <Step value="6">
+                <span>Account</span>
+                &nbsp;
+                <i v-if="isAccountPassed()" class="pi pi-check text-green-600 !text-lg" />
+                <i v-if="isAccountFailed()" class="pi pi-times text-red-600 !text-lg" />
+              </Step>
             </StepList>
             <StepPanels>
               <StepPanel v-slot="{ activateCallback }" value="1">
@@ -139,6 +145,24 @@
                   />
                 </div>
               </StepPanel>
+              <StepPanel v-slot="{ active, activateCallback }" value="6">
+                <div class="mt-4">
+                  <div v-if="hasCompletedPreviousSteps(6) && active">
+                    <AccountChecker :is-previous-steps-passed="hasCompletedPreviousSteps(6)" />
+                  </div>
+                  <Message v-else severity="error"
+                    >Please complete previous steps to continue.</Message
+                  >
+                </div>
+                <div class="flex pt-6 mt-4 justify-between">
+                  <PrimeButton
+                    label="Back"
+                    severity="secondary"
+                    icon="pi pi-arrow-left"
+                    @click="activateCallback('5')"
+                  />
+                </div>
+              </StepPanel>
             </StepPanels>
           </Stepper>
         </template>
@@ -163,6 +187,7 @@ import { useSetupStore } from '@/stores/setup'
 import FilePermissionsChecker from '@/components/setup/FilePermissionsChecker.vue'
 import EnvChecker from '@/components/setup/EnvChecker.vue'
 import DBChecker from '@/components/setup/DBChecker.vue'
+import AccountChecker from '@/components/setup/AccountChecker.vue'
 
 const setupStore = useSetupStore()
 
@@ -202,6 +227,14 @@ function isDBFailed() {
   return !setupStore.data.db.is_passed && setupStore.data.db.isLoaded
 }
 
+function isAccountPassed() {
+  return setupStore.data.account.is_passed && setupStore.data.account.isLoaded
+}
+
+function isAccountFailed() {
+  return !setupStore.data.account.is_passed && setupStore.data.account.isLoaded
+}
+
 function hasCompletedPreviousSteps(step) {
   switch (step) {
     case 3:
@@ -210,6 +243,8 @@ function hasCompletedPreviousSteps(step) {
       return isRequirementsPassed() && isFilePermissionPassed()
     case 5:
       return isRequirementsPassed() && isFilePermissionPassed() && isEnvPassed()
+    case 6:
+      return isRequirementsPassed() && isFilePermissionPassed() && isEnvPassed() && isDBPassed()
   }
 }
 </script>

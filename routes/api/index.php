@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Setup\CheckDBController;
 use App\Http\Controllers\Api\Setup\CheckEnvController;
 use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
 use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
+use App\Http\Controllers\Api\Setup\CheckSuperAdminAccountController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('setup.')->prefix('setup')->group(function () {
@@ -29,4 +30,11 @@ Route::name('setup.')->prefix('setup')->group(function () {
     Route::get('db/get-info', [CheckDBController::class, 'info'])->name('db.get-info');
     Route::get('db/check-connection', [CheckDBController::class, 'checkConnection'])->name('db.check-connection');
     Route::get('db/migrate', [CheckDBController::class, 'migrate'])->name('db.migrate');
+
+    /**
+     * Account
+     */
+    Route::get('account/check-exists', [CheckSuperAdminAccountController::class, 'checkExists'])->name('account.check-exists');
+    Route::post('account/create', [CheckSuperAdminAccountController::class, 'create'])->name('account.create');
+
 });

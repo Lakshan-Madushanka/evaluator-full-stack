@@ -24,3 +24,9 @@ export const env_check = `${base}check-env`
 export const get_db_info = `${base}db/get-info`
 export const check_db_connection = `${base}db/check-connection`
 export const migrate_db = `${base}db/migrate`
+
+/**
+ * Account
+ */
+export const check_account_exists = `${base}account/check-exists`
+export const create_account = `${base}account/create`
