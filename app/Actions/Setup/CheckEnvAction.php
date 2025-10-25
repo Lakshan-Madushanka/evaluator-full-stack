@@ -31,17 +31,17 @@ class CheckEnvAction
     {
         return [
             'app' => [
-                ['key' => 'APP_ENV', 'value' => config('app.env'), 'refer' => 'Project Environment'],
-                ['key' => 'APP_DEBUG', 'value' => config('app.debug'), 'refer' => 'Debug Mode'],
+                ['key' => 'APP_ENV', 'value' => app()->environment(), 'refer' => 'Project Environment'],
+                ['key' => 'APP_DEBUG', 'value' => app()->hasDebugModeEnabled(), 'refer' => 'Debug Mode'],
                 ['key' => 'APP_URL', 'value' => config('app.url'), 'refer' => 'Domain'],
                 ['key' => 'APP_NAME', 'value' => config('app.name'), 'refer' => 'Site Name'],
             ],
         ];
     }
 
-    private function generateAppKey(): bool
+    public function generateAppKey(): bool
     {
-        Artisan::call('key:generate');
+        Artisan::call('key:generate', ['--force' => true]);
 
         return (bool) config('app.key');
     }

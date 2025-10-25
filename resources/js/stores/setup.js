@@ -9,10 +9,7 @@ import { reactive, ref } from 'vue'
 export const useSetupStore = defineStore('setup', () => {
   const appStore = useAppStore()
 
-  const loading = ref(false)
   const status = ref('')
-
-  const errors = ref({})
 
   const data = reactive({
     php: {
@@ -28,6 +25,7 @@ export const useSetupStore = defineStore('setup', () => {
     },
     env: {
       app: {},
+      keyStatus: '',
       is_exists: false,
       loading: false,
       isLoaded: false,
@@ -57,7 +55,6 @@ export const useSetupStore = defineStore('setup', () => {
    * Check setup status
    */
   async function checkStatus() {
-    resetStatus(true, '', {})
     try {
       const response = await setupRequests.checkStatus()
       status.value = response.status
@@ -71,24 +68,19 @@ export const useSetupStore = defineStore('setup', () => {
    * PHP Requirements Check
    */
   async function checkPHPVersion() {
-    resetStatus(true, '', {})
     data.php.version.loading = true
-    errors.value = {}
 
     try {
       data.php.version = await setupRequests.checkPHPVersionRequest()
     } catch (data) {
       console.error(data)
     } finally {
-      loading.value = false
       data.php.version.loading = false
     }
   }
 
   async function checkPHPExtensions() {
-    resetStatus(true, '', {})
     data.php.extensions.loading = true
-    errors.value = {}
 
     try {
       const response = await setupRequests.checkPHPExtensionsRequest()
@@ -97,7 +89,6 @@ export const useSetupStore = defineStore('setup', () => {
     } catch (data) {
       console.error(data)
     } finally {
-      loading.value = false
       data.php.extensions.loading = false
     }
   }
@@ -106,9 +97,7 @@ export const useSetupStore = defineStore('setup', () => {
    * File Permissions Check
    */
   async function checkFilePermissions() {
-    resetStatus(true, '', {})
     data.filePermissions.loading = true
-    errors.value = {}
 
     try {
       const response = await setupRequests.checkFilePermissions()
@@ -118,7 +107,6 @@ export const useSetupStore = defineStore('setup', () => {
     } catch (data) {
       console.error(data)
     } finally {
-      loading.value = false
       data.filePermissions.loading = false
     }
   }
@@ -127,9 +115,7 @@ export const useSetupStore = defineStore('setup', () => {
    * ENV Check
    */
   async function checkEnv() {
-    resetStatus(true, '', {})
     data.env.loading = true
-    errors.value = {}
 
     try {
       const response = await setupRequests.checkEnv()
@@ -140,8 +126,24 @@ export const useSetupStore = defineStore('setup', () => {
     } catch (data) {
       console.error(data)
     } finally {
-      loading.value = false
       data.env.loading = false
+    }
+  }
+
+  async function generateKey() {
+    data.env.keyStatus = 'generating'
+
+    try {
+      const response = await setupRequests.generateKey()
+      if (response.status) {
+        data.env.keyStatus = 'generated'
+      } else {
+        data.env.keyStatus = 'error'
+      }
+    } catch (data) {
+      data.env.keyStatus = 'error'
+      console.error(data)
+    } finally {
     }
   }
 
@@ -149,24 +151,19 @@ export const useSetupStore = defineStore('setup', () => {
    * DB Check
    */
   async function getDBInfo() {
-    resetStatus(true, '', {})
     data.db.loading = true
-    errors.value = {}
 
     try {
       data.db.info = await setupRequests.getDBInfo()
     } catch (data) {
       console.error(data)
     } finally {
-      loading.value = false
       data.db.loading = false
     }
   }
 
   async function checkDBConnection() {
-    resetStatus(true, '', {})
     data.db.status.checkingConnection = true
-    errors.value = {}
 
     try {
       data.db.connection = await setupRequests.checkConnection()
@@ -179,9 +176,7 @@ export const useSetupStore = defineStore('setup', () => {
   }
 
   async function migrateDB() {
-    resetStatus(true, '', {})
     data.db.status.migrating = true
-    errors.value = {}
 
     try {
       const response = await setupRequests.migrateDB()
@@ -203,9 +198,7 @@ export const useSetupStore = defineStore('setup', () => {
    * Account
    */
   async function checkAccountExists() {
-    resetStatus(true, '', {})
     data.account.status.checkingExistence = true
-    errors.value = {}
 
     try {
       const response = await setupRequests.checkAccountExists()
@@ -224,9 +217,7 @@ export const useSetupStore = defineStore('setup', () => {
   }
 
   async function createAccount(payload) {
-    resetStatus(true, '', {})
     data.account.status.creating = true
-    errors.value = {}
 
     try {
       const response = await setupRequests.createAccount(payload)
@@ -241,21 +232,15 @@ export const useSetupStore = defineStore('setup', () => {
     }
   }
 
-  function resetStatus(isLoading, statusValue) {
-    loading.value = isLoading
-    status.value = statusValue
-  }
-
   return {
-    loading,
     status,
-    errors,
     data,
     checkStatus,
     checkPHPVersion,
     checkPHPExtensions,
     checkFilePermissions,
     checkEnv,
+    generateKey,
     getDBInfo,
     checkDBConnection,
     migrateDB,

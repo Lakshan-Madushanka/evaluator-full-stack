@@ -19,6 +19,7 @@ export const file_permissions_check = `${base}check-file-permissions`
  * ENV
  */
 export const env_check = `${base}check-env`
+export const generate_key = `${base}generate-key`
 
 /**
  * DB

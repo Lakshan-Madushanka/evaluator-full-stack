@@ -31,6 +31,10 @@ export async function checkEnv() {
   return await http.get(setupRoutes.env_check)
 }
 
+export async function generateKey() {
+  return await http.get(setupRoutes.generate_key)
+}
+
 /**
  * DB Check
  */

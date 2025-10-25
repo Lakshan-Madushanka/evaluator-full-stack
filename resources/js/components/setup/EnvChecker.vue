@@ -53,10 +53,7 @@
                     ></i>
                   </td>
 
-                  <td
-                    v-else-if="app['key'] === 'APP_DEBUG' && app['value'] !== 'false'"
-                    class="p-4"
-                  >
+                  <td v-else-if="app['key'] === 'APP_DEBUG' && app['value']" class="p-4">
                     <i
                       v-tooltip="'Please set your APP_DEBUG to false'"
                       class="pi pi-info-circle !text-xl text-yellow-600 hover:cursor-pointer"

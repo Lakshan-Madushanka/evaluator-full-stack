@@ -29,7 +29,8 @@ Route::name('setup.')->prefix('setup')->group(function () {
         /**
          * Env Check
          */
-        Route::get('/check-env', CheckEnvController::class)->name('check-env');
+        Route::get('/check-env', [CheckEnvController::class, 'check'])->name('check-env');
+        Route::get('/generate-key', [CheckEnvController::class, 'generateKey'])->name('generate-key');
 
         /**
          * DB Check
