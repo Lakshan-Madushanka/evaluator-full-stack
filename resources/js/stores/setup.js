@@ -54,6 +54,20 @@ export const useSetupStore = defineStore('setup', () => {
   })
 
   /**
+   * Check setup status
+   */
+  async function checkStatus() {
+    resetStatus(true, '', {})
+    try {
+      const response = await setupRequests.checkStatus()
+      status.value = response.status
+    } catch (data) {
+      console.error(data)
+    } finally {
+    }
+  }
+
+  /**
    * PHP Requirements Check
    */
   async function checkPHPVersion() {
@@ -220,7 +234,6 @@ export const useSetupStore = defineStore('setup', () => {
       data.account.is_passed = true
       data.account.isLoaded = true
     } catch (errors) {
-      console.error('data...', errors.errors)
       data.account.errors = errors.errors
       appStore.setToast('error', errors.message)
     } finally {
@@ -238,6 +251,7 @@ export const useSetupStore = defineStore('setup', () => {
     status,
     errors,
     data,
+    checkStatus,
     checkPHPVersion,
     checkPHPExtensions,
     checkFilePermissions,

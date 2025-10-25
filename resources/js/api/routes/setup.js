@@ -2,6 +2,8 @@ const baseURL = import.meta.env.VITE_BASE_API_URL
 
 const base = `${baseURL}api/setup/`
 
+export const check_setup_status = `${base}check-status`
+
 /**
  * PHP Requirements
  */

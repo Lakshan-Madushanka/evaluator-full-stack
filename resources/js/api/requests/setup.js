@@ -2,6 +2,10 @@ import * as setupRoutes from '../routes/setup'
 
 import http from '@/http'
 
+export async function checkStatus() {
+  return await http.get(setupRoutes.check_setup_status)
+}
+
 /**
  * PHP Requirements Check
  */

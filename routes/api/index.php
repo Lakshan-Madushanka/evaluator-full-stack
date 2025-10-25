@@ -6,8 +6,13 @@ use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
 use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
 use App\Http\Controllers\Api\Setup\CheckSuperAdminAccountController;
 use Illuminate\Support\Facades\Route;
+use \Illuminate\Support\Facades\Cache;
 
 Route::name('setup.')->prefix('setup')->group(function () {
+    Route::get('check-status', function () {
+        return response()->json(['status' => Cache::get('setup_status', 'incompleted')]);
+    })->name('check-status');
+
     /**
      * PHP Requirements Check
      */
@@ -36,5 +41,4 @@ Route::name('setup.')->prefix('setup')->group(function () {
      */
     Route::get('account/check-exists', [CheckSuperAdminAccountController::class, 'checkExists'])->name('account.check-exists');
     Route::post('account/create', [CheckSuperAdminAccountController::class, 'create'])->name('account.create');
-
 });

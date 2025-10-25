@@ -12,7 +12,7 @@
         <i class="pi pi-check-circle text-green-500 !text-2xl" />
       </div>
     </Message>
-    <PrimeButton @click="() => (window.location.href = '/')" class="mt-6" label="Refresh" />
+    <PrimeButton @click="refreshPage" class="mt-6" label="Refresh" />
   </Dialog>
 </template>
 
@@ -43,7 +43,11 @@ watch(
 
 watch(show, (showShow) => {
   if (!showShow) {
-    window.location.href = '/'
+    refreshPage()
   }
 })
+
+function refreshPage() {
+  window.location.href = '/'
+}
 </script>

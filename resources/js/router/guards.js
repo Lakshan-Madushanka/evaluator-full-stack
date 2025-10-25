@@ -1,6 +1,7 @@
 import router from './index'
 import { useAppStore } from '@/stores/app'
 import { useCandidatesQuestionnairesStore } from '@/stores/candidates/questionnaires'
+import { useSetupStore } from '@/stores/setup'
 
 export const auth = async (to) => {
   const appStore = useAppStore()
@@ -24,4 +25,16 @@ export const candidate = async (to) => {
   router.push({ name: 'home', query: { redirect: to.fullPath } })
 
   return false
+}
+
+export const setup = async () => {
+  const setupStore = useSetupStore()
+
+  console.log('guard setup', setupStore.status)
+  if (!setupStore.status) {
+    router.replace({ name: 'check-setup' })
+    return false
+  }
+
+  return true
 }
