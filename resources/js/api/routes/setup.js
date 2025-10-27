@@ -33,3 +33,8 @@ export const migrate_db = `${base}db/migrate`
  */
 export const check_account_exists = `${base}account/check-exists`
 export const create_account = `${base}account/create`
+
+/**
+ * Optimize
+ */
+export const optimize_route = `${base}optimize`

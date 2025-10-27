@@ -60,3 +60,10 @@ export async function checkAccountExists() {
 export async function createAccount(payload) {
   return await http.post(setupRoutes.create_account, payload)
 }
+
+/**
+ * optimize
+ */
+export async function optimize() {
+  return await http.post(setupRoutes.optimize_route)
+}

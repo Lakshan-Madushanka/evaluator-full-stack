@@ -48,6 +48,11 @@ export const useSetupStore = defineStore('setup', () => {
       loading: false,
       isLoaded: false,
       is_passed: false
+    },
+    optimize: {
+      status: '',
+      isLoaded: false,
+      is_passed: false
     }
   })
 
@@ -137,6 +142,7 @@ export const useSetupStore = defineStore('setup', () => {
       const response = await setupRequests.generateKey()
       if (response.status) {
         data.env.keyStatus = 'generated'
+        status.value = 'completed'
       } else {
         data.env.keyStatus = 'error'
       }
@@ -232,6 +238,25 @@ export const useSetupStore = defineStore('setup', () => {
     }
   }
 
+  /**
+   * Optimize
+   */
+  async function optimize() {
+    data.optimize.status = 'optimizing'
+
+    try {
+      const response = await setupRequests.optimize()
+      if (response.status) {
+        data.optimize.status = 'optimized'
+      } else {
+        data.optimize.status = 'error'
+      }
+    } catch (data) {
+      data.optimize.status = 'error'
+      console.error(data)
+    } finally {
+    }
+  }
   return {
     status,
     data,
@@ -245,6 +270,7 @@ export const useSetupStore = defineStore('setup', () => {
     checkDBConnection,
     migrateDB,
     checkAccountExists,
-    createAccount
+    createAccount,
+    optimize
   }
 })

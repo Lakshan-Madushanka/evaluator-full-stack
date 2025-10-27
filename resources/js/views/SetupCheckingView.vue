@@ -43,7 +43,6 @@ watch(
   () => setupStore.status,
   (newStatus) => {
     if (newStatus === 'incompleted') {
-      console.log('laksa', newStatus)
       router.push({ name: 'setup' })
       return
     }

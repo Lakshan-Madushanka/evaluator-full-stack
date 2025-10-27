@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Setup\CheckEnvController;
 use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
 use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
 use App\Http\Controllers\Api\Setup\CheckSuperAdminAccountController;
+use App\Http\Controllers\Api\Setup\OptimizeController;
 use App\Http\Middleware\SetupMiddleware;
 use Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Cache;
@@ -44,5 +45,10 @@ Route::name('setup.')->prefix('setup')->group(function () {
          */
         Route::get('account/check-exists', [CheckSuperAdminAccountController::class, 'checkExists'])->name('account.check-exists');
         Route::post('account/create', [CheckSuperAdminAccountController::class, 'create'])->name('account.create');
+
+        /**
+         * Optimize
+         */
+        Route::post('optimize', OptimizeController::class)->name('optimize');
     });
 });

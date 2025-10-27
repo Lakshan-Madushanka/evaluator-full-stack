@@ -30,7 +30,6 @@ export const candidate = async (to) => {
 export const setup = async () => {
   const setupStore = useSetupStore()
 
-  console.log('guard setup', setupStore.status)
   if (!setupStore.status) {
     router.replace({ name: 'check-setup' })
     return false

@@ -23,8 +23,40 @@
       <PrimeButton @click="refreshPage" label="Refresh" />
     </div>
 
-    <div v-if="setupStore.status === 'incompleted'">
-      <div v-if="!setupStore.data.env.keyStatus" class="space-y-6">
+    <div v-if="setupStore.status === 'incompleted'" class="space-y-8">
+      <p
+        v-if="setupStore.data.optimize.status === 'optimizing'"
+        class="text-xl flex items-center gap-4"
+      >
+        <span>Optimizing</span> <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+      </p>
+      <Message v-if="setupStore.data.optimize.status === 'optimized'" severity="success">
+        <span class="text-lg">App optimized successfully! </span>
+      </Message>
+      <Message v-if="setupStore.data.optimize.status === 'error'" severity="error">
+        <span class="flex flex-col space-y-4 items-start">
+          <span>
+            Error occurred while optimizing app!. Please run the following command in the terminal
+            from the project's (site's) root directory.
+          </span>
+          <Badge severity="info">php artisan optimize</Badge>
+          <span class="flex items-center gap-2">
+            <i class="pi pi-exclamation-circle !text-2xl" />
+            <span class="text-lg"
+              >It is crucial to run this command to improve site's overall performance.</span
+            >
+          </span>
+        </span>
+      </Message>
+
+      <div
+        v-if="
+          !setupStore.data.env.keyStatus &&
+          (setupStore.data.optimize.status === 'optimized' ||
+            setupStore.data.optimize.status === 'error')
+        "
+        class="space-y-6"
+      >
         <p class="text-xl">Setup is almost completed</p>
         <Message class="info">
           <span class="text-lg"
@@ -39,7 +71,7 @@
       </div>
     </div>
 
-    <div v-if="setupStore.data.env.keyStatus === 'error'" class="space-y-6">
+    <div v-if="setupStore.data.env.keyStatus === 'error'" class="space-y-6 mt-8">
       <Message severity="error">
         <span class="flex flex-col space-y-4 items-start">
           <span>
@@ -85,6 +117,9 @@ watch(
   () => props.visible,
   function (isVisible) {
     if (isVisible) {
+      if (setupStore.status !== 'completed') {
+        setupStore.optimize()
+      }
       show.value = true
     }
   }

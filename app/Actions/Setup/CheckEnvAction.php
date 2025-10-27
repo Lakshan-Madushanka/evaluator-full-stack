@@ -41,13 +41,12 @@ class CheckEnvAction
 
     public function generateAppKey(): bool
     {
-        Artisan::call('key:generate', ['--force' => true]);
+        $status = Artisan::call('key:generate', ['--force' => true]);
 
-        return (bool) config('app.key');
-    }
+        if ($status !== 0) {
+            return false;
+        }
 
-    private function checkDB(): bool
-    {
-        config(['database.default' => 'local']);
+        return true;
     }
 }
