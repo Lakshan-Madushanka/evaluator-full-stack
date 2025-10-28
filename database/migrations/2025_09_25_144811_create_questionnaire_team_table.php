@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('questionnaire_team', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
 
             $table->unsignedSmallInteger('questionnaire_id')->nullable();
             $table->foreignIdFor(Team::class)->nullable()->constrained()->nullOnDelete();

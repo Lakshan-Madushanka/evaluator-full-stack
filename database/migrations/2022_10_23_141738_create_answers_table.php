@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
 
             $table->string('pretty_id', 25)->unique();
 
