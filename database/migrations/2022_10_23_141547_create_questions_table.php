@@ -21,7 +21,13 @@ return new class extends Migration
             // if answers type is single only one answer is exist and users are allowed to pick one answer
             $table->boolean('is_answers_type_single')->default(false);
             $table->tinyInteger('difficulty')->index();
-            $table->text('text')->fulltext();
+
+            if (DB::connection() instanceof SQLiteConnection) {
+                $table->text('text');
+            } else {
+                $table->text('text')->fulltext();
+            }
+
             $table->tinyInteger('no_of_answers');
 
             $table->timestamps();

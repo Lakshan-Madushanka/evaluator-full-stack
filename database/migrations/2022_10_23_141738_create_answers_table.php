@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -18,7 +19,11 @@ return new class extends Migration
 
             $table->string('pretty_id', 25)->unique();
 
-            $table->text('text')->fulltext();
+            if (DB::connection() instanceof SQLiteConnection) {
+                $table->text('text');
+            } else {
+                $table->text('text')->fulltext();
+            }
 
             $table->timestamps();
         });
