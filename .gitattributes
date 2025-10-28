@@ -9,3 +9,12 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+vercel.json export-ignore
+cliff.toml export-ignore
+_ide_helper.php export-ignore
+.vercelignore export-ignore
+.vercel export-ignore
+.junie export-ignore
+.phpunit.cache export-ignore
+.vite export-ignore
+api/ export-ignore
