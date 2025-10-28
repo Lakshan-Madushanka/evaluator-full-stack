@@ -38,3 +38,35 @@ a,
 .v-sidebar-menu .vsm--mobile-bg {
   background-color: rgb(44, 44, 44) !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #6c6b6b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #c6c4c4;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #404040;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #9c9b9b;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #0c0c0c;
+}

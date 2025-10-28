@@ -5,6 +5,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import { useAppStore } from '@/stores/app'
 
+const SetupCheckingView = () => import('../views/SetupCheckingView.vue')
+
+const SetupView = () => import('../views/SetupView.vue')
 const HomeView = () => import('../views/HomeView.vue')
 const AboutView = () => import('../views/AboutView.vue')
 const MainErrorView = () => import('../views/errors/MainErrorView.vue')
@@ -115,6 +118,17 @@ const router = createRouter({
       path: '',
       component: DefaultLayout,
       children: [
+        {
+          path: '/checking-setup',
+          name: 'check-setup',
+          component: SetupCheckingView
+        },
+        {
+          beforeEnter: guards.setup,
+          path: '/setup',
+          name: 'setup',
+          component: SetupView
+        },
         {
           path: '',
           name: 'home',

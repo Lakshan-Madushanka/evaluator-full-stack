@@ -1,5 +1,5 @@
 <template>
-  <section class="awsom-login-section my-8 sm:my-16 mx-4">
+  <section class="awsom-login-section py-8 sm:py-16 px-4">
     <div class="sign-in">
       <div class="content">
         <h2>Sign In</h2>
