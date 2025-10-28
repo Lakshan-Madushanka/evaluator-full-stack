@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('questionnaires', function (Blueprint $table) {
-            $table->smallIncrements('id')->primary();
+            $table->smallIncrements('id');
 
             $table->string('name', 50)->unique();
             $table->tinyInteger('difficulty');
