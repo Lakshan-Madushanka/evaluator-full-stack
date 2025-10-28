@@ -9,7 +9,7 @@ class CreateSuperAdminAccountAction
 {
     public function execute(array $inputs): User|false
     {
-        if (!$this->checkAccountExists()) {
+        if (! $this->checkAccountExists()) {
             return User::create([
                 ...$inputs,
                 'role' => Role::SUPER_ADMIN,
@@ -25,6 +25,4 @@ class CreateSuperAdminAccountAction
             ->where('role', Role::SUPER_ADMIN)
             ->exists();
     }
-
-
 }

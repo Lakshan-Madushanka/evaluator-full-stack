@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class CheckDBAction
 {
-
     public function execute(): int
     {
         return Artisan::call('migrate', ['--force' => true]);
@@ -32,13 +31,14 @@ class CheckDBAction
         ];
 
         if (DB::connection() instanceof SQLiteConnection) {
-           if( !$this->createSqliteDB()) {
-               $info['has_database_created'] = false;
-               $info['status'] = 'fail';
-               return $info;
-           } else {
-               $info['has_database_created'] = true;
-           }
+            if (! $this->createSqliteDB()) {
+                $info['has_database_created'] = false;
+                $info['status'] = 'fail';
+
+                return $info;
+            } else {
+                $info['has_database_created'] = true;
+            }
         }
 
         try {

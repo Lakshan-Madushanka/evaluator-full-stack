@@ -13,7 +13,6 @@ class SetupMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (Response|RedirectResponse)  $next
      * @return Response|RedirectResponse
      */

@@ -7,8 +7,8 @@ use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
 use App\Http\Controllers\Api\Setup\CheckSuperAdminAccountController;
 use App\Http\Controllers\Api\Setup\OptimizeController;
 use App\Http\Middleware\SetupMiddleware;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
-use \Illuminate\Support\Facades\Cache;
 
 Route::name('setup.')->prefix('setup')->group(function () {
     Route::get('check-status', function () {
@@ -19,8 +19,8 @@ Route::name('setup.')->prefix('setup')->group(function () {
         /**
          * PHP Requirements Check
          */
-        Route::get('/check-php-version' , [CheckPHPRequirementsController::class, 'checkPHPVersion'])->name('check-php-version');
-        Route::get('/check-php-extensions' , [CheckPHPRequirementsController::class, 'checkExtensions'])->name('check-php-extensions');
+        Route::get('/check-php-version', [CheckPHPRequirementsController::class, 'checkPHPVersion'])->name('check-php-version');
+        Route::get('/check-php-extensions', [CheckPHPRequirementsController::class, 'checkExtensions'])->name('check-php-extensions');
 
         /**
          * File Permissions Check

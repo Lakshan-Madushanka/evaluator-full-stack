@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class CheckSuperAdminAccountController extends Controller
 {
-
     public function checkExists(CreateSuperAdminAccountAction $action): JsonResponse
     {
         $accountExists = $action->checkAccountExists();
@@ -30,5 +29,4 @@ class CheckSuperAdminAccountController extends Controller
 
         return response()->json($user);
     }
-
 }

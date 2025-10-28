@@ -8,7 +8,7 @@ class CheckEnvAction
 {
     public function execute(): array
     {
-        if (!$this->checkEnvFileExists()) {
+        if (! $this->checkEnvFileExists()) {
             return [
                 'is_exists' => false,
             ];
@@ -17,7 +17,7 @@ class CheckEnvAction
         return [
             'is_exists' => true,
             ...$this->getData(),
-            'is_passed' => app()->isProduction() && !app()->hasDebugModeEnabled(),
+            'is_passed' => app()->isProduction() && ! app()->hasDebugModeEnabled(),
         ];
     }
 
@@ -25,7 +25,6 @@ class CheckEnvAction
     {
         return file_exists(base_path('.env'));
     }
-
 
     public function getData(): array
     {

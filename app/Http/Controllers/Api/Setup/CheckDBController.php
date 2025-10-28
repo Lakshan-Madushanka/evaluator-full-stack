@@ -11,7 +11,7 @@ class CheckDBController extends Controller
     public function migrate(CheckDBAction $checkDBAction): JsonResponse
     {
         return response()->json([
-            'migrated_status' => $checkDBAction->execute()
+            'migrated_status' => $checkDBAction->execute(),
         ]);
     }
 

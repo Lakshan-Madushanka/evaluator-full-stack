@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 
 class OptimizeController extends Controller
 {
-
     public function __invoke(OptimizeAction $action): JsonResponse
     {
         $status = $action->execute();

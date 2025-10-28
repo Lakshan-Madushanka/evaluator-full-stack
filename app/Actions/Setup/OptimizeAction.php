@@ -14,6 +14,6 @@ class OptimizeAction
             return false;
         }
 
-        return  true;
+        return true;
     }
 }

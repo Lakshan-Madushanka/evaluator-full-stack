@@ -18,7 +18,7 @@ class CheckPHPRequirementsController extends Controller
     {
         $list = $checkPHPExtensions->execute();
 
-        $isPasses = collect($list)->every(fn($v) => $v === true);;
+        $isPasses = collect($list)->every(fn ($v) => $v === true);
 
         return response()->json([
             'list' => $list,

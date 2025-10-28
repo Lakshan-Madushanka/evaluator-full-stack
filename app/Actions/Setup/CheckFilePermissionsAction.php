@@ -15,13 +15,13 @@ class CheckFilePermissionsAction
             $requiredPermission = (int) $permission;
 
             if (! ($currentPermission >= $requiredPermission)) {
-                $this->addFile($file, $currentPermission, $requiredPermission,  false);
+                $this->addFile($file, $currentPermission, $requiredPermission, false);
             } else {
                 $this->addFile($file, $currentPermission, $requiredPermission, true);
             }
         }
 
-        $this->permissions['hasErrors'] = !collect($this->permissions['permissions'])->every(fn($v) => $v['isSet']);;
+        $this->permissions['hasErrors'] = ! collect($this->permissions['permissions'])->every(fn ($v) => $v['isSet']);
 
         return $this->permissions;
     }
