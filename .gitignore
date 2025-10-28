@@ -34,3 +34,4 @@ git-cliff*
 bin
 *.sqlite
 coverage
+evaluator
