@@ -6,7 +6,7 @@
         <!-- Difficulty -->
         <div class="md:w-[calc(50%-1rem)] mb-8 md:mr-8">
           <span class="p-float-label">
-            <Dropdown
+            <Select
               v-model="state.difficulty"
               :options="difficultyOptions"
               :class="['w-full', { 'p-invalid': v$.difficulty.$invalid }]"
@@ -86,7 +86,7 @@
         <!-- Answers type -->
         <div class="md:w-[calc(50%-1rem)] mb-8 md:mr-8">
           <span class="p-float-label">
-            <Dropdown
+            <Select
               v-model="state.is_answers_type_single"
               :options="answersTypeOptions"
               :class="['w-full', { 'p-invalid': v$.is_answers_type_single.$invalid }]"
@@ -220,18 +220,19 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { useQuestionsStore } from '@/stores/questions'
 import { useCategoriesStore } from '@/stores/categories'
 
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
+import FloatLabel from 'primevue/floatlabel'
 import InputNumber from 'primevue/inputnumber'
 import MultiSelect from 'primevue/multiselect'
 import PrimeButton from 'primevue/button'
 
 import { useVuelidate } from '@vuelidate/core'
-import { required, minLength } from '@vuelidate/validators'
+import { minLength, required } from '@vuelidate/validators'
 
 import FormLayout from '@/views/layouts/FormLayout.vue'
 import TextEditor from '@/components/form/textEditors/DefaultTextEditor.vue'
@@ -240,7 +241,8 @@ import { exists as existsRule, messages as validationErrorMessages } from '@/val
 
 export default {
   components: {
-    Dropdown,
+    Select,
+    FloatLabel,
     FormLayout,
     InputNumber,
     PrimeButton,
