@@ -17,7 +17,7 @@
           <template #empty>
             <p
               v-if="!usersQuestionnairesStore.loading"
-              class="p-4 text-center text-2xl bg-blue-200"
+              class="p-4 text-center text-2xl bg-gray-800 text-white"
             >
               No records found.
             </p>
@@ -354,12 +354,12 @@
 </template>
 
 <script>
-import { onMounted, ref, reactive, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import Paginator from '@/components/PaginatorComponent.vue'
 
 import { useUsersQuestionnairesStore } from '@/stores/users/questionnaires'
 
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import moment from 'moment/moment'
 

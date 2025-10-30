@@ -13,7 +13,10 @@
           filter-display="row"
         >
           <template #empty>
-            <p v-if="!questionnairesStore.loading" class="p-4 text-center text-2xl bg-blue-200">
+            <p
+              v-if="!questionnairesStore.loading"
+              class="p-4 text-center text-2xl bg-gray-800 text-white"
+            >
               No records found.
             </p>
           </template>
@@ -448,7 +451,7 @@
 </template>
 
 <script>
-import { onMounted, ref, reactive, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { useQuestionnairesStore } from '@/stores/questionnaires/index'
 import { useDashboardStore } from '@/stores/dashboard'
@@ -477,7 +480,7 @@ import { useConfirm } from 'primevue/useconfirm'
 import SortComponent from '@/components/SortComponent.vue'
 import Paginator from '@/components/PaginatorComponent.vue'
 
-import { lowercaseFirstLetter, snake, findRelations } from '@/helpers'
+import { findRelations, lowercaseFirstLetter, snake } from '@/helpers'
 
 export default {
   components: {

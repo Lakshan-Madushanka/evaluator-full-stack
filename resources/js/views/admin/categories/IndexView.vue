@@ -13,7 +13,10 @@
           filter-display="row"
         >
           <template #empty>
-            <p v-if="!categoriesStore.loading" class="p-4 text-center text-2xl bg-blue-200">
+            <p
+              v-if="!categoriesStore.loading"
+              class="p-4 text-center text-2xl bg-gray-800 text-white"
+            >
               No records found.
             </p>
           </template>
@@ -156,7 +159,7 @@
 </template>
 
 <script>
-import { onMounted, ref, reactive, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { useAuthStore } from '@/stores/auth'
 import { useCategoriesStore } from '@/stores/categories/index'

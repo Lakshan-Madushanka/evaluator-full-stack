@@ -212,7 +212,7 @@
         </Column>
 
         <template #empty>
-          <p v-if="!answersStore.loading" class="p-4 text-center text-2xl bg-blue-200">
+          <p v-if="!answersStore.loading" class="p-4 text-center text-2xl bg-gray-800 text-white">
             No records found.
           </p>
         </template>
@@ -238,7 +238,7 @@
 </template>
 
 <script>
-import { onMounted, watch, ref, reactive } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { useRouter } from 'vue-router'
 
@@ -259,7 +259,7 @@ import moment from 'moment/moment'
 import SortComponent from '@/components/SortComponent.vue'
 import Paginator from '@/components/PaginatorComponent.vue'
 
-import { lowercaseFirstLetter, snake, findRelations, formatText } from '@/helpers'
+import { findRelations, formatText, lowercaseFirstLetter, snake } from '@/helpers'
 
 export default {
   components: {

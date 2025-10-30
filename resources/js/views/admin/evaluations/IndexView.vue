@@ -48,7 +48,10 @@
         filter-display="row"
       >
         <template #empty>
-          <p v-if="!evaluationsStore.loading" class="p-4 text-center text-2xl bg-blue-200">
+          <p
+            v-if="!evaluationsStore.loading"
+            class="p-4 text-center text-2xl bg-gray-800 text-white"
+          >
             No records found.
           </p>
         </template>
@@ -383,9 +386,9 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import { useEvaluationsStore } from '@/stores/evaluations'
 
@@ -407,7 +410,7 @@ import InputIcon from 'primevue/inputicon'
 
 import moment from 'moment/moment'
 
-import { lowercaseFirstLetter, snake, formatMinutes } from '@/helpers'
+import { formatMinutes, lowercaseFirstLetter, snake } from '@/helpers'
 
 export default {
   components: {
