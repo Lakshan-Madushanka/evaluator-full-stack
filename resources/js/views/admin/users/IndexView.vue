@@ -39,7 +39,6 @@
       <PrimeButton
         type="button"
         label="Attach"
-        severity="warn"
         :disabled="selectedTeams.length === 0"
         :loading="usersTeamsStore.status === 'attaching'"
         @click="onConfirmTeamAttach"
@@ -216,7 +215,7 @@
             :hidden="!columnVisibility.role"
           >
             <template #filter
-              ><Dropdown v-model="filters.role" :options="roles" option-label="name" />
+              ><Select v-model="filters.role" :options="roles" option-label="name" />
             </template>
             <template #header>
               <div class="flex justify-between w-full items-center">
@@ -376,7 +375,7 @@ import Tag from 'primevue/tag'
 import MenuComponent from 'primevue/menu'
 import MultiSelect from 'primevue/multiselect'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
 import ConfirmDialog from 'primevue/confirmdialog'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
@@ -402,7 +401,7 @@ export default {
     Paginator,
     SortComponent,
     InputText,
-    Dropdown,
+    Select,
     MenuComponent,
     MultiSelect,
     ConfirmDialog,
@@ -718,8 +717,7 @@ export default {
           outlined: true
         },
         acceptProps: {
-          label: 'Yes Attach',
-          severity: 'warn'
+          label: 'Yes Attach'
         },
         accept: () => {
           usersTeamsStore.attachTeams(selectedUserIdToAttachTeams, selectedTeams.value)

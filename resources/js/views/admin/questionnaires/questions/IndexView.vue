@@ -57,7 +57,7 @@
         <div
           class="flex justify-between px-4 items-center w-full py-8 bg-gray-100 dark:bg-black border-y-2 border-neutral-200 dark:border-neutral-700"
         >
-          <div class="text-lg font-bold flex items-centenr gap-4">
+          <div class="text-lg font-bold flex items-center gap-4">
             <p>List of Questions ({{ getListQuestionsCount() }})</p>
             <PrimeButton
               severity="info"
@@ -68,7 +68,7 @@
               @click="maximizeQuestionList = true"
             />
           </div>
-          <Dropdown
+          <Select
             v-model="selectedDiffculty"
             :options="difficultyFilterOptions"
             option-label="name"
@@ -77,7 +77,7 @@
         </div>
 
         <!--Question List-->
-        <TransitionGroup name="list" tag="ul" class="h-[25rem] bg-black overflow-y-auto">
+        <TransitionGroup name="list" tag="ul" class="h-[25rem] dark:bg-black overflow-y-auto">
           <li
             v-for="(question, index) of data.questions"
             :key="question.id"
@@ -123,7 +123,7 @@
                   Marks:
                   <InputNumber
                     v-model="question.attributes.marks"
-                    input-class="w-16 h-10"
+                    input-class="w-24 h-10 dark:text-white"
                     show-buttons
                     :min="1"
                     :max="10"
@@ -181,7 +181,7 @@
               @click="maximizeQuestionList = false"
             />
           </div>
-          <Dropdown
+          <Select
             v-model="selectedDiffculty"
             :options="difficultyFilterOptions"
             option-label="name"
@@ -378,7 +378,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { useRoute } from 'vue-router'
 
@@ -386,7 +386,7 @@ import { useQuestionnairesQuestionsStore } from '@/stores/questionnaires/questio
 
 import Card from 'primevue/card'
 import ConfirmDialog from 'primevue/confirmdialog'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
 import PrimeDialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
@@ -403,7 +403,7 @@ export default {
   components: {
     Card,
     ConfirmDialog,
-    Dropdown,
+    Select,
     PrimeDialog,
     PrimeButton,
     Skeleton,
