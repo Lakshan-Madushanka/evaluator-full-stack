@@ -15,6 +15,6 @@
     />
 </head>
 <body>
-<div id="app" class="dark:bg-black text-black dark:text-white"></div>
+<div id="app" class="bg-white dark:bg-black text-black dark:text-white"></div>
 </body>
 </html>
