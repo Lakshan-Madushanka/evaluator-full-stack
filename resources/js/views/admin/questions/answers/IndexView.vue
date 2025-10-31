@@ -53,6 +53,7 @@
                     v-model="answer.attributes.correct_answer"
                     :input-id="`answer_${answer.attributes.pretty_id}`"
                     binary
+                    @click.stop
                   />
                 </div>
               </div>
@@ -169,7 +170,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { useRoute } from 'vue-router'
 
@@ -375,7 +376,7 @@ export default {
       }
 
       if (answers.length > route.query.total_answers - data.answers.length) {
-        showWarningDialog('No of allowed questions limit exceeded!')
+        showWarningDialog('No of allowed answers limit exceeded!')
         return
       }
 

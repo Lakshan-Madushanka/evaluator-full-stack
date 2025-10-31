@@ -88,7 +88,7 @@
       <div class="p-4 space-y-4">
         <!-- Questionnaire -->
         <Card
-          v-for="(question, questionIndex) in currrentPageRecords"
+          v-for="(question, questionIndex) in currentPageRecords"
           :id="`${question.id}_card`"
           :key="question.id"
         >
@@ -105,13 +105,25 @@
                 <!--Question images-->
                 <div
                   v-if="question.relationships.images.data.length > 0"
-                  class="mt-4 flex flex-wrap justify-center space-y-2"
+                  class="mt-4 flex flex-wrap justify-start space-y-2"
                 >
                   <PrimeImage
                     v-for="questionImage in question.relationships.images.data"
                     :key="questionImage.id"
-                    :src="questionImage.attributes.original_url"
-                    :alt="questionImage.attributes.file_name"
+                    :src="
+                      findRelations(
+                        candidatesQuestionnairesStore.meta.included,
+                        questionImage.id,
+                        questionImage.type
+                      ).attributes.original_url
+                    "
+                    :alt="
+                      findRelations(
+                        candidatesQuestionnairesStore.meta.included,
+                        questionImage.id,
+                        questionImage.type
+                      ).attributes.file_name
+                    "
                     preview
                   />
                 </div>
@@ -134,7 +146,7 @@
                       class="mr-2"
                     />
 
-                    <label :for="answer.id">{{ answer?.attributes?.text }}</label>
+                    <label :for="answer.id" v-html="answer?.attributes?.text"></label>
                   </div>
 
                   <div v-else class="flex items-center">
@@ -147,19 +159,31 @@
                       class="mr-2"
                     />
 
-                    <label :for="answer.id">{{ answer?.attributes?.text }}</label>
+                    <label :for="answer.id" v-html="answer?.attributes?.text"></label>
                   </div>
 
                   <!-- Answer images -->
                   <div
-                    v-if="answer.relationships.images?.length > 0"
-                    class="mt-4 flex flex-wrap justify-center space-y-2"
+                    v-if="answer.relationships.images?.data?.length > 0"
+                    class="mt-4 flex flex-wrap justify-start space-y-2"
                   >
                     <PrimeImage
-                      v-for="answerImage in answer.relationships.images"
+                      v-for="answerImage in answer.relationships.images.data"
                       :key="answerImage.id"
-                      :src="answerImage.attributes.original_url"
-                      :alt="answerImage.attributes.file_name"
+                      :src="
+                        findRelations(
+                          candidatesQuestionnairesStore.meta.included,
+                          answerImage.id,
+                          answerImage.type
+                        ).attributes.original_url
+                      "
+                      :alt="
+                        findRelations(
+                          candidatesQuestionnairesStore.meta.included,
+                          answerImage.id,
+                          answerImage.type
+                        ).attributes.file_name
+                      "
                       preview
                     />
                   </div>
@@ -184,7 +208,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, reactive, computed, onUnmounted, nextTick, onUpdated } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
@@ -248,7 +272,7 @@ export default {
     let elapsedMinutes = 0
     const warnMessageTime = 5
 
-    const currrentPageRecords = ref()
+    const currentPageRecords = ref()
     const paginator = { perPage: 10, page: 1, offset: 0 }
 
     const showEvaluation = ref(false)
@@ -266,8 +290,8 @@ export default {
       () => candidatesQuestionnairesStore.questions,
       (newQuestions) => {
         if (newQuestions) {
-          setAnwers(newQuestions)
-          currrentPageRecords.value = getPaginatorRecords()
+          setAnswers(newQuestions)
+          currentPageRecords.value = getPaginatorRecords()
         }
       },
       { immediate: true }
@@ -303,7 +327,7 @@ export default {
       return candidatesQuestionnairesStore.questionnaireInfo?.allocated_time * 60 * Math.pow(10, 3)
     }
 
-    function setAnwers(newQuestions) {
+    function setAnswers(newQuestions) {
       for (let question of newQuestions) {
         questionAnswers[question.id] = []
 
@@ -313,16 +337,19 @@ export default {
             answer.id,
             answer.type
           )
+
           questionAnswers[question.id].push(relatedAnswer)
         }
       }
+
+      console.log(questionAnswers)
     }
 
     function onPageChange(event) {
       paginator.page = event.page + 1 // paginator start with page 0
       paginator.perPage = event.rows
 
-      currrentPageRecords.value = getPaginatorRecords()
+      currentPageRecords.value = getPaginatorRecords()
     }
 
     function getQuestionNo(index) {
@@ -450,7 +477,7 @@ export default {
     return {
       route,
       router,
-      currrentPageRecords,
+      currentPageRecords,
       candidatesQuestionnairesStore,
       questionnaire: computed(() => candidatesQuestionnairesStore.questionnaireInfo),
       paginator,
@@ -468,7 +495,6 @@ export default {
       getQuestionAnsweredStatus,
       noOfAnsweredQuestions,
       showSubmitConfirmDialog,
-      submit,
       onTimeElapsed,
       showSidebar
     }

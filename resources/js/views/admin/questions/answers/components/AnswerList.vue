@@ -45,7 +45,9 @@
                       v-if="slotProps['item']['label'] === 'Bulk Controllers'"
                       class="flex justify-between w-full text-sm text-blue-400"
                     >
-                      <span class="hover:text-blue-800" @click="displayAllColumns">Dsplay All</span>
+                      <span class="hover:text-blue-800" @click="displayAllColumns"
+                        >Display All</span
+                      >
                       <span class="hover:text-blue-800" @click="hideAllColumns">Hide All</span>
                     </div>
                     <template v-else>
@@ -297,7 +299,7 @@ export default {
     const bulkDeleteValue = ref('')
     const bulkActions = [
       {
-        label: 'Sync Questions',
+        label: 'Sync Answers',
         icon: 'pi pi-sync',
         command: () => {
           let value = ''

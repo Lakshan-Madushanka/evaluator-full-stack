@@ -49,8 +49,8 @@
             :href="`#${question.id}_card`"
             class="shadow-md mr-1 mb-1 p-1 hover:cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 border border-solid border-1 border-gray-300"
             :class="{
-              'bg-green-200': userHasCorrectAnswer(question),
-              'bg-red-200': !userHasCorrectAnswer(question)
+              'bg-green-500': userHasCorrectAnswer(question),
+              'bg-red-500': !userHasCorrectAnswer(question)
             }"
             @click="navigate(index + 1)"
           >
@@ -86,14 +86,26 @@
                 </div>
                 <!--Question images-->
                 <div
-                  v-if="question.relationships.images.data.length > 0"
-                  class="mt-4 flex flex-wrap justify-center space-y-2"
+                  v-if="question.relationships?.images?.data?.length > 0"
+                  class="mt-4 flex flex-wrap justify-start space-y-2"
                 >
                   <PrimeImage
                     v-for="questionImage in question.relationships.images.data"
                     :key="questionImage.id"
-                    :src="questionImage.attributes.original_url"
-                    :alt="questionImage.attributes.file_name"
+                    :src="
+                      findRelations(
+                        questionnairesQuestionsStore.meta.included,
+                        questionImage.id,
+                        questionImage.type
+                      ).attributes.original_url
+                    "
+                    :alt="
+                      findRelations(
+                        questionnairesQuestionsStore.meta.included,
+                        questionImage.id,
+                        questionImage.type
+                      ).attributes.file_name
+                    "
                     preview
                   />
                 </div>
@@ -126,7 +138,7 @@
                       disabled
                     />
 
-                    <label :for="answer.id">{{ answer?.attributes?.text }} </label>
+                    <label :for="answer.id" v-html="answer?.attributes?.text"> </label>
 
                     <i
                       v-if="answer.id === correctAnswers[question.id]"
@@ -145,7 +157,7 @@
                       disabled
                     />
 
-                    <label :for="answer.id">{{ answer?.attributes?.text }}</label>
+                    <label :for="answer.id" v-html="answer?.attributes?.text"></label>
 
                     <i
                       v-if="correctAnswers[question.id].includes(answer.id)"
@@ -156,13 +168,25 @@
                   <!-- Answer images -->
                   <div
                     v-if="answer.relationships.images.data.length > 0"
-                    class="mt-4 flex flex-wrap justify-center space-y-2"
+                    class="mt-4 flex flex-wrap justify-start space-y-2"
                   >
                     <PrimeImage
                       v-for="answerImage in answer.relationships.images.data"
                       :key="answerImage.id"
-                      :src="answerImage.attributes.original_url"
-                      :alt="answerImage.attributes.file_name"
+                      :src="
+                        findRelations(
+                          questionnairesQuestionsStore.meta.included,
+                          answerImage.id,
+                          answerImage.type
+                        ).attributes.original_url
+                      "
+                      :alt="
+                        findRelations(
+                          questionnairesQuestionsStore.meta.included,
+                          answerImage.id,
+                          answerImage.type
+                        ).attributes.file_name
+                      "
                       preview
                     />
                   </div>
@@ -187,7 +211,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, reactive, computed } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
@@ -205,7 +229,7 @@ import ScrollTop from 'primevue/scrolltop'
 
 import QuestionnaireSkeleton from '@/components/skeletons/QuestionnaireSkeleton.vue'
 
-import { findRelations, formatMinutes, arraysHaveSameValues } from '@/helpers'
+import { arraysHaveSameValues, findRelations, formatMinutes } from '@/helpers'
 
 export default {
   components: {
@@ -244,13 +268,13 @@ export default {
       () => questionnairesQuestionsStore.questions,
       (newQuestions) => {
         if (newQuestions) {
-          setAnwers(newQuestions)
+          setAnswers(newQuestions)
           currrentPageRecords.value = getPaginatorRecords()
         }
       }
     )
 
-    function setAnwers(newQuestions) {
+    function setAnswers(newQuestions) {
       for (let question of newQuestions) {
         questionAnswers[question.id] = []
 
@@ -332,6 +356,10 @@ export default {
         )
       }
 
+      if (!evaluationsStore.evaluation.answers[question.id]) {
+        return false
+      }
+
       return arraysHaveSameValues(
         correctAnswers.value[question.id],
         evaluationsStore.evaluation.answers[question.id]
@@ -367,7 +395,6 @@ export default {
       showPrintView,
       paginator,
       formatMinutes,
-      arraysHaveSameValues,
       userHasCorrectAnswer
     }
   }

@@ -80,14 +80,26 @@
                 </div>
                 <!--Question images-->
                 <div
-                  v-if="question.relationships.images?.length > 0"
-                  class="mt-4 flex flex-wrap justify-center space-y-2"
+                  v-if="question.relationships.images?.data?.length > 0"
+                  class="mt-4 flex flex-wrap justify-start space-y-2"
                 >
                   <PrimeImage
-                    v-for="questionImage in question.relationships.images"
+                    v-for="questionImage in question.relationships.images.data"
                     :key="questionImage.id"
-                    :src="questionImage.original_url"
-                    :alt="questionImage.file_name"
+                    :src="
+                      findRelations(
+                        questionnairesQuestionsStore.meta.included,
+                        questionImage.id,
+                        questionImage.type
+                      ).attributes.original_url
+                    "
+                    :alt="
+                      findRelations(
+                        questionnairesQuestionsStore.meta.included,
+                        questionImage.id,
+                        questionImage.type
+                      ).attributes.file_name
+                    "
                     preview
                   />
                 </div>
@@ -111,7 +123,7 @@
                       disabled
                     />
 
-                    <label :for="answer.id">{{ answer?.attributes?.text }}</label>
+                    <label :for="answer.id" v-html="answer?.attributes?.text"></label>
                   </div>
 
                   <div v-else class="flex items-center">
@@ -125,19 +137,31 @@
                       disabled
                     />
 
-                    <label :for="answer.id">{{ answer?.attributes?.text }}</label>
+                    <label :for="answer.id" v-html="answer?.attributes?.text"></label>
                   </div>
 
                   <!-- Answer images -->
                   <div
-                    v-if="answer.relationships.images?.length > 0"
-                    class="mt-4 flex flex-wrap justify-center space-y-2"
+                    v-if="answer.relationships.images?.data?.length > 0"
+                    class="mt-4 flex flex-wrap justify-start space-y-2"
                   >
                     <PrimeImage
-                      v-for="answerImage in answer.relationships.images"
+                      v-for="answerImage in answer.relationships.images.data"
                       :key="answerImage.id"
-                      :src="answerImage.original_url"
-                      :alt="answerImage.file_name"
+                      :src="
+                        findRelations(
+                          questionnairesQuestionsStore.meta.included,
+                          answerImage.id,
+                          answerImage.type
+                        ).attributes.original_url
+                      "
+                      :alt="
+                        findRelations(
+                          questionnairesQuestionsStore.meta.included,
+                          answerImage.id,
+                          answerImage.type
+                        ).attributes.file_name
+                      "
                       preview
                     />
                   </div>
@@ -162,7 +186,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, reactive, computed } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
