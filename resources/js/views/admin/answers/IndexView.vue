@@ -162,7 +162,9 @@
             <div class="flex justify-between items-center relative">
               <p v-html="formatText(slotProps.data.attributes.text, 100)"></p>
               <div class="group">
-                <i class="pi pi-eye !block hover:text-blue-600 hover:cursor-pointer !text-xl">
+                <i
+                  class="pi pi-search-plus !block hover:text-blue-600 hover:cursor-pointer !text-xl"
+                >
                   <p
                     class="p-4 bg-black text-white hidden group-hover:block absolute left-0 top-[-1rem] whitespace-normal z-10"
                     v-html="slotProps.data.attributes.text"
