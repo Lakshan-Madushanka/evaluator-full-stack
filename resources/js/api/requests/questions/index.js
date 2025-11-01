@@ -18,24 +18,6 @@ export async function getOneRequest(id, payload) {
   return response
 }
 
-export async function getImagesRequest(id) {
-  const response = await http.get(questionsRoutes.get_route_to_load_images(id))
-
-  return response
-}
-
-export async function getChangeOrderOfImagesRequest(payload) {
-  const response = await http.post(questionsRoutes.get_route_to_change_order_of_images, payload)
-
-  return response
-}
-
-export async function getRemoveImagesRequest(ids) {
-  const response = await http.post(questionsRoutes.get_route_to_remove_images, ids)
-
-  return response
-}
-
 export async function createQuestionRequest(payload) {
   const response = await http.post(questionsRoutes.get_create_route, payload)
 

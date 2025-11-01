@@ -44,54 +44,6 @@ export const useQuestionsStore = defineStore('questions', () => {
     }
   }
 
-  async function getImages(id) {
-    resetStatus(true, '', {})
-    images.value = []
-
-    try {
-      const response = await questionsRequests.getImagesRequest(id)
-      question.value = response
-
-      images.value = response.data
-    } catch (data) {
-      //
-    } finally {
-      loading.value = false
-    }
-  }
-
-  async function chageOrderOfImages(payload) {
-    resetStatus(true, 'changing', {})
-
-    try {
-      await questionsRequests.getChangeOrderOfImagesRequest(payload)
-
-      //const images =
-      status.value = 'changed'
-    } catch (data) {
-      //
-      status.value = ''
-    } finally {
-      loading.value = false
-    }
-  }
-
-  async function removeImages(ids) {
-    resetStatus(true, 'removing', {})
-
-    try {
-      await questionsRequests.getRemoveImagesRequest(ids)
-
-      //const images =
-      status.value = 'removed'
-    } catch (data) {
-      //
-      status.value = ''
-    } finally {
-      loading.value = false
-    }
-  }
-
   async function createQuestion(payload) {
     resetStatus(false, 'creating')
     errors.value = {}
@@ -177,12 +129,9 @@ export const useQuestionsStore = defineStore('questions', () => {
     images,
     getOne,
     getAll,
-    getImages,
-    chageOrderOfImages,
     createQuestion,
     editQuestion,
     deleteQuestion,
-    bulkDeleteQuestions,
-    removeImages
+    bulkDeleteQuestions
   }
 })
