@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Evaluator</title>
 
-    @vite(['resources/css/app.css', 'resources/js/main.js'])
+    {{
+       Illuminate\Support\Facades\Vite::withEntryPoints(['resources/css/app.css', 'resources/js/main.js'])
+        ->useBuildDirectory('app')
+    }}
 
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link
