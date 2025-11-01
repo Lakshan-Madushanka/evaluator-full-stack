@@ -143,7 +143,7 @@
             <!-- Answer images -->
             <div
               v-if="answer.relationships?.images?.data?.length > 0"
-              class="mt-4 flex flex-wrap justify-center space-y-2"
+              class="mt-4 flex flex-wrap justify-start space-y-2"
             >
               <PrimeImage
                 v-for="answerImage in answer.relationships.images.data"
