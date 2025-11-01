@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
 use App\Http\Controllers\Api\Setup\CheckPHPRequirementsController;
 use App\Http\Controllers\Api\Setup\CheckSuperAdminAccountController;
 use App\Http\Controllers\Api\Setup\OptimizeController;
+use App\Http\Controllers\Api\Setup\SymlinkController;
 use App\Http\Middleware\SetupMiddleware;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -50,5 +51,10 @@ Route::name('setup.')->prefix('setup')->group(function () {
          * Optimize
          */
         Route::post('optimize', OptimizeController::class)->name('optimize');
+
+        /**
+         * Symlink
+         */
+        Route::post('create-symlink', SymlinkController::class)->name('create-symlink');
     });
 });

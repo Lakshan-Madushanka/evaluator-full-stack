@@ -53,6 +53,11 @@ export const useSetupStore = defineStore('setup', () => {
       status: '',
       isLoaded: false,
       is_passed: false
+    },
+    symlink: {
+      status: '',
+      isLoaded: false,
+      is_passed: false
     }
   })
 
@@ -257,6 +262,27 @@ export const useSetupStore = defineStore('setup', () => {
     } finally {
     }
   }
+
+  /**
+   * Optimize
+   */
+  async function createSymlink() {
+    data.symlink.status = 'creating'
+
+    try {
+      const response = await setupRequests.createSymlink()
+      if (response.status) {
+        data.symlink.status = 'created'
+      } else {
+        data.symlink.status = 'error'
+      }
+    } catch (data) {
+      data.symlink.status = 'error'
+      console.error(data)
+    } finally {
+    }
+  }
+
   return {
     status,
     data,
@@ -271,6 +297,7 @@ export const useSetupStore = defineStore('setup', () => {
     migrateDB,
     checkAccountExists,
     createAccount,
-    optimize
+    optimize,
+    createSymlink
   }
 })

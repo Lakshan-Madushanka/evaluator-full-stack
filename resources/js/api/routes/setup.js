@@ -38,3 +38,8 @@ export const create_account = `${base}account/create`
  * Optimize
  */
 export const optimize_route = `${base}optimize`
+
+/**
+ * Symlink
+ */
+export const create_symlink_route = `${base}create-symlink`

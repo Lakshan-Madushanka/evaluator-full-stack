@@ -25,6 +25,29 @@
 
     <div v-if="setupStore.status === 'incompleted'" class="space-y-8">
       <p
+        v-if="setupStore.data.symlink.status === 'creating'"
+        class="text-xl flex items-center gap-4"
+      >
+        <span>Creating storage link</span> <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+      </p>
+      <Message v-if="setupStore.data.symlink.status === 'created'" severity="success">
+        <span class="text-lg">Storage link created successfully! </span>
+      </Message>
+      <Message v-if="setupStore.data.symlink.status === 'error'" severity="error">
+        <span class="flex flex-col space-y-4 items-start">
+          <span>
+            Error occurred while creating storage link!. Please run the following command in the
+            terminal from the project's (site's) root directory.
+          </span>
+          <Badge severity="info">php artisan storage:link</Badge>
+          <span class="flex items-center gap-2">
+            <i class="pi pi-exclamation-circle !text-2xl" />
+            <span class="text-lg">Uploaded images won't display without storage link.</span>
+          </span>
+        </span>
+      </Message>
+
+      <p
         v-if="setupStore.data.optimize.status === 'optimizing'"
         class="text-xl flex items-center gap-4"
       >
@@ -93,14 +116,14 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import {ref, watch} from 'vue'
 
 import Badge from 'primevue/badge'
 import Dialog from 'primevue/dialog'
 import PrimeButton from 'primevue/button'
 import Message from 'primevue/message'
 
-import { useSetupStore } from '@/stores/setup'
+import {useSetupStore} from '@/stores/setup'
 
 const setupStore = useSetupStore()
 
@@ -115,12 +138,13 @@ const show = ref(false)
 
 watch(
   () => props.visible,
-  function (isVisible) {
+  async (isVisible) => {
     if (isVisible) {
+      show.value = true
       if (setupStore.status !== 'completed') {
+        await setupStore.createSymlink()
         setupStore.optimize()
       }
-      show.value = true
     }
   }
 )

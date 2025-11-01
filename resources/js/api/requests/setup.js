@@ -67,3 +67,10 @@ export async function createAccount(payload) {
 export async function optimize() {
   return await http.post(setupRoutes.optimize_route)
 }
+
+/**
+ * optimize
+ */
+export async function createSymlink() {
+  return await http.post(setupRoutes.create_symlink_route)
+}
