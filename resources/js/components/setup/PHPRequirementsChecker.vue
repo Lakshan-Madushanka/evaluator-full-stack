@@ -1,18 +1,27 @@
 <template>
   <div>
     <div>
-      <p class="text-xl mb-4 font-bold flex items-center gap-4">
-        <span>PHP Version</span>
-        <i
-          v-if="setupStore.data.php.version.loading"
-          class="pi pi-spin pi-spinner text-green-600 !text-2xl"
-        ></i>
-        <i
-          v-else-if="setupStore.data.php.version.supported"
-          class="pi pi-check-circle text-green-600 !text-2xl"
-        ></i>
-        <i v-else class="pi pi-times-circle text-red-600 !text-2xl"></i>
-      </p>
+      <div class="flex justify-between items-start">
+        <p class="text-xl mb-4 font-bold flex items-center gap-4">
+          <span>PHP Version</span>
+          <i
+            v-if="setupStore.data.php.version.loading"
+            class="pi pi-spin pi-spinner text-green-600 !text-2xl"
+          ></i>
+          <i
+            v-else-if="setupStore.data.php.version.supported"
+            class="pi pi-check-circle text-green-600 !text-2xl"
+          ></i>
+          <i v-else class="pi pi-times-circle text-red-600 !text-2xl"></i>
+        </p>
+
+        <PrimeButton
+          @click="check()"
+          icon="pi pi-refresh"
+          title="Refresh"
+          :disabled="setupStore.data.php.version.loading || setupStore.data.php.extensions.loading"
+        />
+      </div>
       <ul class="list list-none space-y-2 text-bold">
         <li class="w-[15rem] justify-between flex">
           <span>Platform Version</span>
@@ -93,6 +102,7 @@ import { useSetupStore } from '@/stores/setup'
 
 import Divider from 'primevue/divider'
 import ProgressSpinner from 'primevue/progressspinner'
+import PrimeButton from 'primevue/button'
 
 const setupStore = useSetupStore()
 
@@ -101,6 +111,10 @@ onMounted(async () => {
     return
   }
 
+  check()
+})
+
+async function check() {
   await setupStore.checkPHPVersion()
 
   if (setupStore.data.php.version.supported) {
@@ -108,7 +122,7 @@ onMounted(async () => {
   }
 
   setupStore.data.php.isLoaded = true
-})
+}
 </script>
 
 <style scoped></style>

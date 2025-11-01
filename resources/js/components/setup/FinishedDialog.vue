@@ -9,6 +9,18 @@
     :closable="false"
     :closeOnEscape="false"
   >
+    <template #header>
+      <div class="flex justify-between items-start w-full">
+        <span class="text-xl font-bold">Setup Complete</span>
+        <PrimeButton
+          v-if="setupStore.status === 'incompleted'"
+          @click="runFinalizeCommands()"
+          icon="pi pi-refresh"
+          title="Refresh"
+          :disabled="setupStore.data.account.loading"
+        />
+      </div>
+    </template>
     <div
       v-if="setupStore.data.env.keyStatus === 'generated' || setupStore.status === 'completed'"
       class="flex flex-col gap-8 w-full justify-center items-center space-4 text-xl font-bold"
@@ -142,8 +154,7 @@ watch(
     if (isVisible) {
       show.value = true
       if (setupStore.status !== 'completed') {
-        await setupStore.createSymlink()
-        setupStore.optimize()
+        runFinalizeCommands()
       }
     }
   }
@@ -154,6 +165,11 @@ watch(show, (showShow) => {
     refreshPage()
   }
 })
+
+async function runFinalizeCommands() {
+  await setupStore.createSymlink()
+  setupStore.optimize()
+}
 
 function refreshPage() {
   window.location.href = '/'
