@@ -51,7 +51,7 @@ class AppServiceProvider extends ServiceProvider
     public function registerLocally(): void
     {
         if ($this->app->environment('local')) {
-           // $this->registerTelescope();
+            // $this->registerTelescope();
             // $this->handleExceedingCumulativeQueryDuration();
         }
     }
