@@ -9,15 +9,12 @@
   >
     <Skeleton height="8rem" class="mb-6" />
     <div class="bg-white flex flex-col items-center justify-center dark:bg-black">
-      <Skeleton v-for="n in 10" :key="n" class="m-4" height="16rem" width="95%" />
+      <Skeleton v-for="n in 10" :key="`skeleton-${n}`" class="m-4" height="16rem" width="95%" />
     </div>
   </div>
   <div v-else class="w-[210mm] mx-auto">
     <!-- Header -->
-    <header
-      class="p-4 mb-4 text-black dark:text-white border-b-2 border-black dark:border-white"
-      @click="test"
-    >
+    <header class="p-4 mb-4 text-black dark:text-white border-b-2 border-black dark:border-white">
       <div class="flex flex-col items-center justify-center space-y-2">
         <div class="flex items-center justify-center mb-4">
           <p class="text-2xl font-bold mr-4 uppercase">
@@ -46,7 +43,7 @@
       <div
         v-for="(question, questionIndex) in currentPageRecords"
         :id="`${question.id}_card`"
-        :key="question.id"
+        :key="`question-card-${question.id}`"
       >
         <!-- Questions -->
         <div class="text-black dark:text-white">
@@ -66,7 +63,7 @@
           >
             <PrimeImage
               v-for="questionImage in question.relationships.images.data"
-              :key="questionImage.id"
+              :key="`question-${question.id}-image-${questionImage.id}`"
               :src="
                 findRelations(
                   questionnairesQuestionsStore.meta.included,
@@ -90,7 +87,7 @@
         <div class="ml-8 mt-2">
           <div
             v-for="(answer, answerIndex) in questionAnswers[question.id]"
-            :key="answer.id"
+            :key="`question-${question.id}-answer-${answer.id}`"
             class="mt-4"
           >
             <div v-if="question.attributes.answers_type_single" class="flex items-center">
@@ -143,11 +140,11 @@
             <!-- Answer images -->
             <div
               v-if="answer.relationships?.images?.data?.length > 0"
-              class="mt-4 flex flex-wrap justify-start space-y-2"
+              class="mt-4 gap-2 flex flex-wrap justify-center"
             >
               <PrimeImage
                 v-for="answerImage in answer.relationships.images.data"
-                :key="answerImage.id"
+                :key="`answer-${answer.id}-image-${answerImage.id}`"
                 :src="
                   findRelations(
                     questionnairesQuestionsStore.meta.included,
