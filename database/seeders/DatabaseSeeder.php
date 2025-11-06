@@ -6,7 +6,11 @@ namespace Database\Seeders;
 
 use App\Enums\Role;
 use App\Models\User;
-use Database\Data\Data;
+use Database\Data\GNData;
+use Database\Data\IQData;
+use Database\Data\IQPatternsData;
+use Database\Data\ProgrammingData;
+use Database\Data\UserData;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
@@ -36,7 +40,11 @@ class DatabaseSeeder extends Seeder
         }
 
         if (App::environment('local')) {
-            Data::seedQuestions();
+            UserData::seedUsers();
+            ProgrammingData::seedQuestions();
+            GNData::seedQuestions();
+            IQData::seedQuestions();
+            IQPatternsData::seedQuestions();
 
             $this->call([
                 TeamSeeder::class,
@@ -62,7 +70,8 @@ class DatabaseSeeder extends Seeder
         $superAdminEmail = 'super-admin@company.com';
 
         User::whereEmail($superAdminEmail)->existsOr(function () {
-            User::factory()->create([
+            User::create([
+                'name' => 'Super Admin',
                 'role' => Role::SUPER_ADMIN,
                 'password' => Hash::make('superAdmin123'),
                 'email' => 'super-admin@company.com',

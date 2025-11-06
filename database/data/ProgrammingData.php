@@ -11,7 +11,7 @@ use App\Services\PrettyIdGenerator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class Data
+class ProgrammingData
 {
     use HasHashids;
 
@@ -375,7 +375,7 @@ class Data
             foreach ($question['answers'] as $aIndex => $answer) {
                 $qa = [];
                 $a = [];
-                $a['pretty_id'] = PrettyIdGenerator::generate('questions', 'ans_'.$lastAnsId, 12);
+                $a['pretty_id'] = PrettyIdGenerator::generate('answers', 'ans_'.$lastAnsId, 13);
                 $a['text'] = $answer;
                 $a['created_at'] = now();
                 $a['updated_at'] = now();
@@ -422,7 +422,7 @@ class Data
 
         $questionnaire->categories()->attach($categories);
 
-        $randomQuestions = Arr::random(Data::$questions, $noOfQuestions);
+        $randomQuestions = Arr::random(ProgrammingData::$questions, $noOfQuestions);
 
         foreach ($randomQuestions as $index => $questionData) {
             $question = Question::where('text', $questionData['question'])->first();
