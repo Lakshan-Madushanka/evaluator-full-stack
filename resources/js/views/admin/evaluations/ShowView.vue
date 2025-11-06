@@ -9,7 +9,7 @@
 
   <template v-else>
     <!-- Header -->
-    <header class="bg-gray-400 mt-[-1rem] p-4 mb-2 text-white dark:text-white dark:bg-gray-900">
+    <header class="bg-gray-900 mt-[-1rem] p-4 mb-2 text-white dark:text-white dark:bg-gray-900">
       <div class="flex flex-col items-center space-y-2 sm:flex-row sm:justify-between">
         <div class="flex items-center justify-center">
           <p class="text-xl font-bold mr-4">

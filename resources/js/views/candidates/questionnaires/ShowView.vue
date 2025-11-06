@@ -7,7 +7,7 @@
   <template v-else>
     <!-- Header -->
     <header
-      class="bg-gray-100 shadow border p-4 text-black dark:text-white dark:bg-gray-900 flex flex-col items-center space-y-2 sm:space-y-0 sm:flex-row sm:justify-between sticky top-0 z-10"
+      class="bg-gray-900 shadow border p-4 text-white dark:text-white dark:bg-gray-900 flex flex-col items-center space-y-2 sm:space-y-0 sm:flex-row sm:justify-between sticky top-0 z-10"
     >
       <div class="flex items-center justify-center">
         <p class="text-xl font-bold mr-2">
