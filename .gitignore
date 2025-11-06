@@ -36,3 +36,4 @@ bin
 *.sqlite
 coverage
 evaluator
+htaccess
