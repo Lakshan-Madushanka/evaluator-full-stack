@@ -8,10 +8,11 @@ use App\Services\FileUploadService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use TiMacDonald\JsonApi\JsonApiResourceCollection;
 
 class FileUploadController extends Controller
 {
-    public function index(string $type, string $modelId, FileUploadService $uploadService): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(string $type, string $modelId, FileUploadService $uploadService): JsonApiResourceCollection
     {
         $medias = $uploadService->getAllFiles($type, $modelId);
 
