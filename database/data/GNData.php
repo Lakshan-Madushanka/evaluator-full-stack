@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Data;
@@ -10,7 +11,6 @@ use App\Models\Concerns\HasHashids;
 use App\Models\Question;
 use App\Models\Questionnaire;
 use App\Services\PrettyIdGenerator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class GNData
@@ -215,7 +215,6 @@ class GNData
 
             $categorizables[] = $category;
 
-
             foreach ($question['answers'] as $aIndex => $answer) {
                 $qa = [];
 
@@ -266,7 +265,6 @@ class GNData
         $categories = Category::query()->whereIn('name', ['General Knowledge'])->pluck('id');
 
         $questionnaire->categories()->attach($categories);
-
 
         foreach (self::$questions as $questionData) {
             $question = Question::where('text', $questionData['question'])->first();

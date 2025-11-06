@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Data;
@@ -89,7 +90,7 @@ class IQPatternsData
                 foreach ($question['images'] as $image) {
                     Media::query()
                         ->create([
-                            'model_type' => (new Question())->getMorphClass(),
+                            'model_type' => (new Question)->getMorphClass(),
                             'model_id' => $lastQuestionId + $index + 1,
                             'collection_name' => 'default',
                             'name' => $image,
@@ -125,7 +126,6 @@ class IQPatternsData
 
             $categorizables[] = $category;
 
-
             foreach ($question['answers'] as $aIndex => $answer) {
                 $qa = [];
 
@@ -146,21 +146,21 @@ class IQPatternsData
                 $questionAnswers[] = $qa;
 
                 if (Arr::get($question, 'answerImages', 0) && array_key_exists((string) ($aIndex + 1), $question['answerImages'])) {
-                        Media::query()
-                            ->create([
-                                'model_type' => (new Answer())->getMorphClass(),
-                                'model_id' => $lastAnsId,
-                                'collection_name' => 'default',
-                                'name' => $question['answerImages'][(string) ($aIndex + 1)],
-                                'file_name' => $question['answerImages'][(string) ($aIndex + 1)],
-                                'disk' => 'public',
-                                'size' => 100,
-                                'manipulations' => [],
-                                'custom_properties' => [],
-                                'mime_type' => 'image/jpeg',
-                                'generated_conversions' => [],
-                                'responsive_images' => [],
-                            ]);
+                    Media::query()
+                        ->create([
+                            'model_type' => (new Answer)->getMorphClass(),
+                            'model_id' => $lastAnsId,
+                            'collection_name' => 'default',
+                            'name' => $question['answerImages'][(string) ($aIndex + 1)],
+                            'file_name' => $question['answerImages'][(string) ($aIndex + 1)],
+                            'disk' => 'public',
+                            'size' => 100,
+                            'manipulations' => [],
+                            'custom_properties' => [],
+                            'mime_type' => 'image/jpeg',
+                            'generated_conversions' => [],
+                            'responsive_images' => [],
+                        ]);
                 }
             }
         }
@@ -194,7 +194,6 @@ class IQPatternsData
         $categories = Category::query()->whereIn('name', ['IQ Patterns'])->pluck('id');
 
         $questionnaire->categories()->attach($categories);
-
 
         foreach (self::$questions as $questionData) {
             $question = Question::where('text', $questionData['question'])->first();

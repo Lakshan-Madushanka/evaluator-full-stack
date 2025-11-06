@@ -9,8 +9,8 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class UserData {
-
+class UserData
+{
     /**
      * @var array<int, array{name:string, email:string, role:mixed}>
      */
@@ -111,7 +111,7 @@ class UserData {
     {
         $team = Team::create(['name' => 'Team Alpha']);
 
-        DB::table((new User())->getTable())->insert(self::$users);
+        DB::table((new User)->getTable())->insert(self::$users);
 
         $team->users()->sync(User::query()->where('role', Role::REGULAR)->limit(5)->get());
     }

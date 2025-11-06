@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Data;
@@ -10,7 +11,6 @@ use App\Models\Concerns\HasHashids;
 use App\Models\Question;
 use App\Models\Questionnaire;
 use App\Services\PrettyIdGenerator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class IQData
@@ -114,6 +114,7 @@ class IQData
             'correctAnswer' => [4],
         ],
     ];
+
     public static function seedQuestions(): void
     {
         $questions = [];
@@ -153,7 +154,6 @@ class IQData
             $category['updated_at'] = now();
 
             $categorizables[] = $category;
-
 
             foreach ($question['answers'] as $aIndex => $answer) {
                 $qa = [];
@@ -206,7 +206,6 @@ class IQData
 
         $questionnaire->categories()->attach($categories);
 
-
         foreach (self::$questions as $questionData) {
             $question = Question::where('text', $questionData['question'])->first();
             if ($question) {
@@ -214,5 +213,4 @@ class IQData
             }
         }
     }
-
 }
