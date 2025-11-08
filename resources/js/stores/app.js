@@ -11,7 +11,7 @@ export const useAppStore = defineStore('app', () => {
   const initialized = ref(false)
   const authenticated = ref(false)
   const authLoadedStatus = ref('')
-  const isDarkMode = ref(checkIsDarkMode() ? true : false)
+  const isDarkMode = ref(checkIsDarkMode())
 
   const toast = reactive({
     id: null,

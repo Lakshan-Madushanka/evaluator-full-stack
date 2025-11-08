@@ -128,14 +128,14 @@
 </template>
 
 <script setup>
-import {ref, watch} from 'vue'
+import { ref, watch } from 'vue'
 
 import Badge from 'primevue/badge'
 import Dialog from 'primevue/dialog'
 import PrimeButton from 'primevue/button'
 import Message from 'primevue/message'
 
-import {useSetupStore} from '@/stores/setup'
+import { useSetupStore } from '@/stores/setup'
 
 const setupStore = useSetupStore()
 
