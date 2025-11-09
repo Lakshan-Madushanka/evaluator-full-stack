@@ -10,7 +10,7 @@ class CreateSymlinkAction
     {
         try {
             $code = Artisan::call('storage:link');
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return false;
         }
 

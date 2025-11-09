@@ -84,7 +84,8 @@ class FileUploadService
     }*/
 
     /**
-     * @param array $medias
+     * @param  array  $medias
+     *
      * @throws \Exception
      */
     public function multipleFileUpload($medias, Model $model, string $collection): MediaCollection
@@ -95,7 +96,7 @@ class FileUploadService
             try {
                 $model->addMedia($media)
                     ->toMediaCollection($collection);
-            }catch (\Exception $exception){
+            } catch (\Exception $exception) {
                 if (config('app.symblink_support')) {
                     throw $exception;
                 }

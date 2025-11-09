@@ -41,7 +41,7 @@ return [
             'root' => env('SUPPORT_SYMBLINK') ? storage_path('app/public') : public_path('uploads'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-            'throw' => !env('SUPPORT_SYMBLINK'),
+            'throw' => ! env('SUPPORT_SYMBLINK'),
         ],
 
         's3' => [
