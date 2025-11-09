@@ -8,7 +8,11 @@ class CreateSymlinkAction
 {
     public function execute(): bool
     {
-        $code = Artisan::call('storage:link');
+        try {
+            $code = Artisan::call('storage:link');
+        }catch (\Exception $exception){
+            return false;
+        }
 
         if ($code !== 0) {
             return false;

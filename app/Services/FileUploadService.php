@@ -84,14 +84,23 @@ class FileUploadService
     }*/
 
     /**
-     * @param  array  $medias
+     * @param array $medias
+     * @throws \Exception
      */
     public function multipleFileUpload($medias, Model $model, string $collection): MediaCollection
     {
         foreach ($medias as $media) {
             // @phpstan-ignore-next-line
-            $model->addMedia($media)
-                ->toMediaCollection($collection);
+
+            try {
+                $model->addMedia($media)
+                    ->toMediaCollection($collection);
+            }catch (\Exception $exception){
+                if (config('app.symblink_support')) {
+                    throw $exception;
+                }
+            }
+
         }
 
         // @phpstan-ignore-next-line
