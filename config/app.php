@@ -211,4 +211,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'older_db_version_support' => env('SUPPORT_OLDER_DB_VERSIONS', false),
+
+    'symblink_support' => env('SUPPORT_SYMBLINK', false),
 ];

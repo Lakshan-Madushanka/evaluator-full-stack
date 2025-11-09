@@ -18,6 +18,7 @@ use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Route;
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         $this->setupPasswordRules();
         $this->customizeJsonApiId();
         $this->implicitRouteModelBinding();
+        $this->enableSupportOlderDBVersions();
     }
 
     public function registerLocally(): void
@@ -179,5 +181,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('hashids', function () {
             return new Hashids;
         });
+    }
+
+    public function enableSupportOlderDBVersions(): void
+    {
+        if (config('app.older_db_version_support', false)) {
+            Schema::defaultStringLength(191);
+        }
     }
 }
