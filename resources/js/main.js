@@ -19,16 +19,16 @@ import { createPinia } from 'pinia'
 // Prime vue
 import { definePreset } from '@primeuix/themes'
 import PrimeVue from 'primevue/config'
-import Aura from '@primeuix/themes/aura'
 import ToastService from 'primevue/toastservice'
 import Tooltip from 'primevue/tooltip'
 import ConfirmationService from 'primevue/confirmationservice'
 
 // Custom directives
 import copyToClipboard from './directives/copyToClipboard'
+import { getTheme } from '@/helpers'
 
 const preset = definePreset(
-  Aura,
+  getTheme(),
   colorSchemes[import.meta.env.VITE_COLOR_SCHEME] ?? colorSchemes['purple']
 )
 

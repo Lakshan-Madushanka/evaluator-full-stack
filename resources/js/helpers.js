@@ -1,6 +1,11 @@
 import moment from 'moment'
 import { usePrimeVue } from 'primevue/config'
 
+import Aura from '@primeuix/themes/aura'
+import Lara from '@primeuix/themes/lara'
+import Nora from '@primeuix/themes/nora'
+import Material from '@primeuix/themes/material'
+
 export function uppercaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
@@ -127,4 +132,21 @@ export function formatFileSize(bytes) {
   const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm))
 
   return `${formattedSize} ${sizes[i]}`
+}
+
+export function getTheme() {
+  const chosenTheme = import.meta.env.VITE_PRESET
+
+  switch (chosenTheme) {
+    case 'aura':
+      return Aura
+    case 'lara':
+      return Lara
+    case 'nova':
+      return Nora
+    case 'material':
+      return Material
+    default:
+      return Aura
+  }
 }
