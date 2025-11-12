@@ -317,12 +317,12 @@
                 </span>
                 <span v-else class="p-buttonset space-x-1">
                   <PrimeButton
-                    v-tooltip="'Use profile section to edit super admin.'"
+                    v-tooltip.left="'Use profile section to edit super admin.'"
                     class="p-button-sm opacity-60"
                     icon="pi pi-info-circle"
                   />
                   <PrimeButton
-                    v-tooltip="'Super admin cannot be deleted !'"
+                    v-tooltip.left="'Super admin cannot be deleted !'"
                     class="p-button-sm p-button-danger opacity-60"
                     icon="pi pi-info-circle"
                   />
