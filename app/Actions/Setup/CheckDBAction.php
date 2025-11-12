@@ -43,11 +43,16 @@ class CheckDBAction
 
         try {
             DB::connection()->getPDO();
+            $info['has_database_created'] = true;
             $info['status'] = 'success';
-            $info['has_database_created'] = $this->createMySqlDB();
-        } catch (\Exception $e) {
-            $info['status'] = 'fail';
-            $info['errors'] = $e->getMessage();
+        } catch (\Exception $e1) {
+            try {
+                $info['has_database_created'] = $this->createMySqlDB();
+                $info['status'] = 'success';
+            }catch (\Exception $e2) {
+                $info['status'] = 'fail';
+                $info['errors'] = $e2->getMessage();
+            }
         }
 
         return $info;
@@ -66,8 +71,12 @@ class CheckDBAction
 
     public function createMySqlDB(): bool
     {
-        $database = DB::connection()->getDatabaseName();
+        $database = DB::getConfig()['database'];
 
-        return DB::statement("CREATE DATABASE IF NOT EXISTS `$database`");
+        $database = preg_replace('/[^A-Za-z0-9_]+/', '', $database);
+
+        $sql = "CREATE DATABASE `$database` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+
+        return DB::statement($sql);
     }
 }

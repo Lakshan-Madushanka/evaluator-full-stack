@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('finished_at')->nullable();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable(config('app.older_db_version_support'));
             $table->json('answers')->nullable();
 
             $table->timestamps();
