@@ -49,7 +49,7 @@ class CheckDBAction
             try {
                 $info['has_database_created'] = $this->createMySqlDB();
                 $info['status'] = 'success';
-            }catch (\Exception $e2) {
+            } catch (\Exception $e2) {
                 $info['status'] = 'fail';
                 $info['errors'] = $e2->getMessage();
             }
