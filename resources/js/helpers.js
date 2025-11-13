@@ -6,6 +6,23 @@ import Lara from '@primeuix/themes/lara'
 import Nora from '@primeuix/themes/nora'
 import Material from '@primeuix/themes/material'
 
+import { useAppStore } from '@/stores/app'
+
+export function getBaseUrl() {
+  const appStore = useAppStore()
+  return appStore.info.base_url
+}
+
+export function getApiUrl() {
+  const appStore = useAppStore()
+  return appStore.info.api_url
+}
+
+export function getApiV1Url() {
+  const appStore = useAppStore()
+  return appStore.info.api_v1_url
+}
+
 export function uppercaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }

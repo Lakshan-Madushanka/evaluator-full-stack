@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\FrontendController;
 use App\Http\Controllers\Api\Setup\CheckDBController;
 use App\Http\Controllers\Api\Setup\CheckEnvController;
 use App\Http\Controllers\Api\Setup\CheckFilePermissionsController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Api\Setup\SymlinkController;
 use App\Http\Middleware\SetupMiddleware;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+
+Route::get('frontend', [FrontendController::class, 'index'])->name('frontend.index');
 
 Route::name('setup.')->prefix('setup')->group(function () {
     Route::get('check-status', function () {

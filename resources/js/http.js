@@ -8,11 +8,16 @@ axios.defaults.withCredentials = true
 axios.defaults.withXSRFToken = true
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
   }
 })
+
+export function setInstance() {
+  const appStore = useAppStore()
+
+  instance.defaults.baseURL = appStore.info.api_v1_url
+}
 
 instance.interceptors.response.use(
   function (response) {
@@ -91,8 +96,7 @@ function handleServerSideErrors(errorResponse) {
   }
 
   if (status === 429) {
-    let retryAfterSeconds = errorResponse['response']['headers']['retry-after']
-    query['retryAfter'] = retryAfterSeconds
+    query['retryAfter'] = errorResponse['response']['headers']['retry-after']
   }
 
   router.push({
