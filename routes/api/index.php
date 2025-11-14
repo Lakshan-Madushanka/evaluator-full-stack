@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::get('frontend', [FrontendController::class, 'index'])->name('frontend.index');
+Route::post('frontend', [FrontendController::class, 'store'])->name('frontend.store');
 
 Route::name('setup.')->prefix('setup')->group(function () {
     Route::get('check-status', function () {

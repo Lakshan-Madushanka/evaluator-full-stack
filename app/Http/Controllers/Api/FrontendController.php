@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Frontend;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Stringable;
-use Illuminate\Support\Uri;
 
 class FrontendController extends Controller
 {
@@ -16,10 +13,10 @@ class FrontendController extends Controller
     {
         $dbData = Frontend::query()->first()?->toArray() ?? [];
 
-      return [$this->getDataFromConfig(), ...$dbData];
+      return [...$this->getDataFromConfig(), ...$dbData];
     }
 
-    public function store(Request $request): Frontend
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
             'base_url' => ['required', 'url'],
@@ -31,11 +28,13 @@ class FrontendController extends Controller
 
         unset($validatedData['base_url']);
 
-        return Frontend::query()
+        $frontend =  Frontend::query()
             ->updateOrCreate(
                 ['id' => 1],
                 [...$validatedData, ...$this->getUrlData($baseUrl)]
             );
+
+        return response()->json($frontend->toArray(), 201);
     }
 
     public function getDataFromConfig(): array
@@ -44,8 +43,8 @@ class FrontendController extends Controller
 
         return [
             ...$this->getUrlData($baseUrl),
-            'preset' => null,
-            'color_scheme' => null,
+            'preset' => 'aura',
+            'color_scheme' => 'purple',
         ];
     }
 
