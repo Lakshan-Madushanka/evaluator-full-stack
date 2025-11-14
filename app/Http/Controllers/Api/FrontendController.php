@@ -13,7 +13,7 @@ class FrontendController extends Controller
     {
         $dbData = Frontend::query()->first()?->toArray() ?? [];
 
-      return [...$this->getDataFromConfig(), ...$dbData];
+        return [...$this->getDataFromConfig(), ...$dbData];
     }
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
@@ -28,7 +28,7 @@ class FrontendController extends Controller
 
         unset($validatedData['base_url']);
 
-        $frontend =  Frontend::query()
+        $frontend = Frontend::query()
             ->updateOrCreate(
                 ['id' => 1],
                 [...$validatedData, ...$this->getUrlData($baseUrl)]
@@ -39,7 +39,7 @@ class FrontendController extends Controller
 
     public function getDataFromConfig(): array
     {
-        $baseUrl =  $this->sanitizeUrl(config('app.url'));
+        $baseUrl = $this->sanitizeUrl(config('app.url'));
 
         return [
             ...$this->getUrlData($baseUrl),
@@ -50,19 +50,19 @@ class FrontendController extends Controller
 
     protected function sanitizeUrl(string $url): string
     {
-        return  str($url)
-            ->whenEndsWith('/', fn(Stringable $str) => $str->replaceLast('/', ''))
+        return str($url)
+            ->whenEndsWith('/', fn (Stringable $str) => $str->replaceLast('/', ''))
             ->toString();
     }
 
     protected function getApiUrl(string $baseUrl): string
     {
-        return  $baseUrl . '/api';
+        return $baseUrl.'/api';
     }
 
     protected function getApiV1Url(string $baseUrl): string
     {
-        return  $baseUrl . '/api/v1';
+        return $baseUrl.'/api/v1';
     }
 
     protected function getUrlData(string $baseUrl): array
