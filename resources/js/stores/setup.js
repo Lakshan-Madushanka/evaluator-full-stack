@@ -130,7 +130,7 @@ export const useSetupStore = defineStore('setup', () => {
     try {
       const response = await setupRequests.checkEnv()
       data.env.is_exists = response.is_exists
-      data.env.is_passed = response.is_passed
+      data.env.is_passed = import.meta.env.MODE === 'development' || response.is_passed
       data.env.app = response.app
       data.env.isLoaded = true
     } catch (data) {

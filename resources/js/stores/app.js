@@ -12,6 +12,7 @@ import { isDarkMode as checkIsDarkMode, setTheme } from '@/helpers'
 export const useAppStore = defineStore('app', () => {
   const authStore = useAuthStore()
 
+  const isLoading = ref(false)
   const status = ref('')
 
   const errors = ref({})
@@ -77,17 +78,23 @@ export const useAppStore = defineStore('app', () => {
   }
 
   async function setAppInfo(force = false) {
-    let data = localStorage.getItem('appInfo')
+    isLoading.value = true
 
-    if (data && !force) {
-      info.value = JSON.parse(data)
-    } else {
-      info.value = await appRequests.getInfo()
-      localStorage.setItem('appInfo', JSON.stringify(info.value))
+    try {
+      let data = localStorage.getItem('appInfo')
+
+      if (data && !force) {
+        info.value = JSON.parse(data)
+      } else {
+        info.value = await appRequests.getInfo()
+        localStorage.setItem('appInfo', JSON.stringify(info.value))
+      }
+
+      setTheme()
+      setInstance()
+    } finally {
+      isLoading.value = false
     }
-
-    setTheme()
-    setInstance()
   }
 
   async function setAuthStatus() {
@@ -97,6 +104,7 @@ export const useAppStore = defineStore('app', () => {
   }
 
   return {
+    isLoading,
     info,
     isDarkMode,
     authenticated,
@@ -107,6 +115,7 @@ export const useAppStore = defineStore('app', () => {
     toast,
     setToast,
     initApp,
-    storeSettings
+    storeSettings,
+    setAppInfo
   }
 })

@@ -37,6 +37,12 @@
                 <i v-if="isAccountPassed()" class="pi pi-check text-green-600 !text-lg" />
                 <i v-if="isAccountFailed()" class="pi pi-times text-red-600 !text-lg" />
               </Step>
+              <Step value="7">
+                <span>Settings</span>
+                &nbsp;
+                <i v-if="isAccountPassed()" class="pi pi-check text-green-600 !text-lg" />
+                <i v-if="isAccountFailed()" class="pi pi-times text-red-600 !text-lg" />
+              </Step>
             </StepList>
             <StepPanels>
               <StepPanel v-slot="{ activateCallback }" value="1">
@@ -145,10 +151,34 @@
                   />
                 </div>
               </StepPanel>
-              <StepPanel v-slot="{ active }" value="6">
+              <StepPanel v-slot="{ active, activateCallback }" value="6">
                 <div class="mt-4">
                   <div v-if="hasCompletedPreviousSteps(6) && active">
                     <AccountChecker :is-previous-steps-passed="hasCompletedPreviousSteps(6)" />
+                  </div>
+                  <Message v-else severity="error"
+                    >Please complete previous steps to continue.</Message
+                  >
+                </div>
+                <div class="flex pt-6 mt-4 justify-between">
+                  <PrimeButton
+                    label="Back"
+                    severity="secondary"
+                    icon="pi pi-arrow-left"
+                    @click="activateCallback('5')"
+                  />
+                  <PrimeButton
+                    label="Next"
+                    icon="pi pi-arrow-right"
+                    iconPos="right"
+                    @click="activateCallback('7')"
+                  />
+                </div>
+              </StepPanel>
+              <StepPanel v-slot="{ active }" value="7">
+                <div class="mt-4">
+                  <div v-if="hasCompletedPreviousSteps(7) && active">
+                    <SettingsComponent />
                   </div>
                   <Message v-else severity="error"
                     >Please complete previous steps to continue.</Message
@@ -181,6 +211,7 @@ import EnvChecker from '@/components/setup/EnvChecker.vue'
 import DBChecker from '@/components/setup/DBChecker.vue'
 import AccountChecker from '@/components/setup/AccountChecker.vue'
 import WelcomeComponent from '@/components/setup/WelcomeComponent.vue'
+import SettingsComponent from '@/components/setup/SettingsComponent.vue'
 
 const setupStore = useSetupStore()
 
@@ -238,6 +269,14 @@ function hasCompletedPreviousSteps(step) {
       return isRequirementsPassed() && isFilePermissionPassed() && isEnvPassed()
     case 6:
       return isRequirementsPassed() && isFilePermissionPassed() && isEnvPassed() && isDBPassed()
+    case 7:
+      return (
+        isRequirementsPassed() &&
+        isFilePermissionPassed() &&
+        isEnvPassed() &&
+        isDBPassed() &&
+        isAccountPassed()
+      )
   }
 }
 </script>
