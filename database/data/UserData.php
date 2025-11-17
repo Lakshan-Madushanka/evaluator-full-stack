@@ -111,7 +111,18 @@ class UserData
     {
         $team = Team::create(['name' => 'Team Alpha']);
 
-        DB::table((new User)->getTable())->insert(self::$users);
+        $users = array_map(
+            function (array $user) {
+                return [
+                    ...$user,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            },
+            self::$users
+        );
+
+        DB::table((new User)->getTable())->insert($users);
 
         $team->users()->sync(User::query()->where('role', Role::REGULAR)->limit(5)->get());
     }

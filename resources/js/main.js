@@ -27,10 +27,7 @@ import ConfirmationService from 'primevue/confirmationservice'
 import copyToClipboard from './directives/copyToClipboard'
 import { getTheme } from '@/helpers'
 
-const preset = definePreset(
-  getTheme(),
-  colorSchemes[import.meta.env.VITE_COLOR_SCHEME] ?? colorSchemes['purple']
-)
+const preset = definePreset(getTheme('aura'), colorSchemes['purple'])
 
 const app = createApp(App)
 

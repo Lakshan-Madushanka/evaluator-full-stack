@@ -22,7 +22,7 @@
     </div>
 
     <div class="flex-col justify-start items-start gap-4 inline-flex w-full">
-      <span class="font-medium dark:text-black">Preset</span>
+      <span class="font-medium dark:text-white">Preset</span>
       <div class="inline-flex items-start gap-2 rounded-[0.71rem] border border-[#00000003] w-full">
         <SelectButton
           v-model="selectedTheme"
@@ -43,8 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { $t, updatePreset } from '@primeuix/themes'
+import {ref, watch} from 'vue'
+import {$t, updatePreset} from '@primeuix/themes'
 import Aura from '@primeuix/themes/aura'
 import Lara from '@primeuix/themes/lara'
 import Nora from '@primeuix/themes/nora'
@@ -52,9 +52,9 @@ import Material from '@primeuix/themes/material'
 import SelectButton from 'primevue/selectbutton'
 import ColorSchemes from '@/themes/colorSchemes'
 
-import { useAppStore } from '@/stores/app'
+import {useAppStore} from '@/stores/app'
 
-import { uppercaseFirstLetter } from '@/helpers'
+import {uppercaseFirstLetter} from '@/helpers'
 
 const appStore = useAppStore()
 

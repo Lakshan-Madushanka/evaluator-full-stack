@@ -39,7 +39,8 @@ watch(
   () => appStore.info.color_scheme,
   (newVal) => {
     mainColor.value = getMainColor(newVal)
-    bgStyle.value = getBgStyle(newVal)
+
+    bgStyle.value = getBgStyle(mainColor.value)
   }
 )
 
