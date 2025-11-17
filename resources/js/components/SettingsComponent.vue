@@ -36,7 +36,7 @@
       </div>
 
       <div>
-        <ThemSwitcher
+        <ThemeSwitcher
           @update:color-scheme="form.color_scheme = $event"
           @update:preset="form.preset = $event"
         />
@@ -55,7 +55,7 @@ import InputText from 'primevue/inputtext'
 import ConfirmDialog from 'primevue/confirmdialog'
 
 import { useAppStore } from '@/stores/app'
-import ThemSwitcher from '@/components/ThemSwitcher.vue'
+import ThemeSwitcher from '@/components/ThemeSwitcher.vue'
 import { lowercaseFirstLetter } from '@/helpers'
 
 import { useConfirm } from 'primevue/useconfirm'
