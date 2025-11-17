@@ -1,5 +1,13 @@
 <?php
 
+use App\Enums\Role;
+use App\Models\User;
+use Database\Data\GNData;
+use Database\Data\IQData;
+use Database\Data\IQPatternsData;
+use Database\Data\ProgrammingData;
+use Database\Data\UserData;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +22,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return 'ok';
+    $status = \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+
+    Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true]);
+    UserData::seedUsers();
+    ProgrammingData::seedQuestions();
+    IQData::seedQuestions();
+    GNData::seedQuestions();
+    IQPatternsData::seedQuestions();
+
+    $superAdminEmail = 'super-admin@company.com';
+
+    User::whereEmail($superAdminEmail)->existsOr(function () {
+        User::create([
+            'name' => 'Super Admin',
+            'role' => Role::SUPER_ADMIN,
+            'password' => Hash::make('superAdmin123'),
+            'email' => 'super-admin@company.com',
+        ]);
+    });
+    return 'ok....status ' . $status;
 });
 
 Route::get('/', function () {
