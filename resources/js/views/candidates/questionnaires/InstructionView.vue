@@ -58,28 +58,37 @@
               <li class="flex">
                 <p class="text-xl mr-2">&#x25CF;</p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                  unknown printer took a galley of type and scrambled it to make a type specimen
-                  book. It has
+                  Once you start the quiz, <strong>do not change or close</strong> the browser, or
+                  <strong>navigate away</strong> from the test window. Otherwise, your test will
+                  <strong>be auto submitted</strong>.
                 </p>
               </li>
+
+              <li>
+                <div class="flex">
+                  <p class="text-xl mr-2">&#x25CF;</p>
+                  <p>
+                    This quiz is limited to a <strong>single attempt</strong>. Make sure you are
+                    ready before starting. Any interruptions during the quiz will lead to
+                    <strong>disqualification</strong>, and <strong>no retakes</strong> will be
+                    permitted.
+                  </p>
+                </div>
+
+                <div class="mt-2 ml-6">
+                  <p>Make sure</p>
+                  <ul class="list-disc ml-8 mt-2">
+                    <li>You have stable internet connection</li>
+                    <li>You have stable power, and a backup is available if needed.</li>
+                  </ul>
+                </div>
+              </li>
+
               <li class="flex">
                 <p class="text-xl mr-2">&#x25CF;</p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                  unknown printer took a galley of type and scrambled it to make a type specimen
-                  book. It has
-                </p>
-              </li>
-              <li class="flex">
-                <p class="text-xl mr-2">&#x25CF;</p>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                  unknown printer took a galley of type and scrambled it to make a type specimen
-                  book. It has
+                  The quiz will be <strong>automatically submitted</strong> when the allotted time
+                  ends. You will receive a warning and a short grace period before submission.
                 </p>
               </li>
             </ul>
