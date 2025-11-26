@@ -73,6 +73,7 @@ export default {
       {
         label: 'Settings',
         icon: 'pi pi-fw pi-cog',
+        visible: () => authStore.user?.role === 'SUPER_ADMIN',
         command: () => {
           showSettings.value = true
         }
