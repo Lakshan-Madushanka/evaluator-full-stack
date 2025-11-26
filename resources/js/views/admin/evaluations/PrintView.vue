@@ -205,7 +205,7 @@ export default {
     const correctAnswers = reactive({})
 
     const currentPageRecords = ref()
-    const paginator = { perPage: 10, page: 1, offset: 0 }
+    const paginator = { perPage: Math.pow(10, 10), page: 1, offset: 0 }
 
     onMounted(() => {
       getQuestionsData()
