@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-12">
+  <div class="space-y-12" v-if="authStore.user?.role === 'SUPER_ADMIN'">
     <!--    <header class="flex gap-2 items-center">-->
     <!--      <h1 class="text-3xl font-bold">Settings</h1>-->
     <!--      <i class="pi pi-cog" style="font-size: 2rem"></i>-->
@@ -55,6 +55,8 @@ import InputText from 'primevue/inputtext'
 import ConfirmDialog from 'primevue/confirmdialog'
 
 import { useAppStore } from '@/stores/app'
+import { useAuthStore } from '@/stores/auth'
+
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue'
 import { lowercaseFirstLetter } from '@/helpers'
 
@@ -63,6 +65,7 @@ import { useConfirm } from 'primevue/useconfirm'
 const confirm = useConfirm()
 
 const appStore = useAppStore()
+const authStore = useAuthStore()
 
 const apiUrl = ref(appStore.info.api_url)
 const apiV1Url = ref(appStore.info.api_v1_url)
