@@ -70,3 +70,7 @@ a,
 .dark ::-webkit-scrollbar-thumb:hover {
     background: #0c0c0c;
 }
+
+.p-datatable-column-header-content {
+    font-weight: bold;
+}

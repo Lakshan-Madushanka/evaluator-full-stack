@@ -1,5 +1,9 @@
 <template>
-  <EvaluationView v-if="showEvaluation" />
+  <EvaluationView
+    :totalQuestions="candidatesQuestionnairesStore?.questions?.length"
+    :submissionType="submissionType"
+    v-if="showEvaluation"
+  />
 
   <ConfirmDialog />
 
@@ -256,6 +260,8 @@ export default {
     const toast = useToast()
     const confirm = useConfirm()
 
+    const submissionType = ref('USER_SUBMISSION')
+
     const candidatesQuestionnairesStore = useCandidatesQuestionnairesStore()
 
     const includes = ['images', 'onlyAnswers.images']
@@ -287,6 +293,7 @@ export default {
     onMounted(() => {
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
+          submissionType.value = 'AUTO_SUBMISSION (navigated away)'
           submit()
         }
       })
@@ -448,6 +455,7 @@ export default {
 
     function onTimeElapsed() {
       showTimeElapseToast()
+      submissionType.value = 'AUTO_SUBMISSION (time elapsed)'
       submit()
     }
 
@@ -484,6 +492,7 @@ export default {
       currentPageRecords,
       candidatesQuestionnairesStore,
       questionnaire: computed(() => candidatesQuestionnairesStore.questionnaireInfo),
+      submissionType,
       paginator,
       userAnswers,
       showAnswers,

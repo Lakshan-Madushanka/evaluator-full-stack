@@ -261,6 +261,19 @@
           </template>
         </Column>
 
+        <!-- No of answered questions -->
+        <Column
+          field="time taken"
+          :show-filter-menu="false"
+          :hidden="!columnVisibility.no_of_answered_questions"
+          header="No of answered questions"
+          class="!text-center"
+        >
+          <template #body="slotProps">
+            {{ slotProps.data.attributes.no_of_answered_questions }}
+          </template>
+        </Column>
+
         <!-- No of correct answers -->
         <Column
           field="no of correct answers"
@@ -455,7 +468,7 @@ export default {
       pagination: { ...initialPagination }
     })
 
-    // Set coulmns visibility
+    // Set colulmns visibility
     const columnsMenuRef = ref()
     const columnVisibility = reactive({
       no: true,

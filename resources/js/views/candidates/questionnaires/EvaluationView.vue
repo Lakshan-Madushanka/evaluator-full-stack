@@ -23,7 +23,16 @@
         </div>
 
         <div class="flex justify-center">
-          <ul class="w-96">
+          <ul class="w-[26rem]">
+            <li
+              class="w-full border-b-2 flex justify-between border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50"
+            >
+              <span>Submission type</span>
+              <Tag v-if="props.submissionType === 'USER_SUBMISSION'">
+                {{ props.submissionType }}</Tag
+              >
+              <Tag v-else severity="danger"> {{ props.submissionType }}</Tag>
+            </li>
             <li
               class="w-full border-b-2 flex justify-between border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50"
             >
@@ -37,6 +46,13 @@
             >
               <span>No of answered questions</span>
               <Tag>{{ evaluation.no_of_answered_questions }}</Tag>
+            </li>
+            <li
+              class="w-full border-b-2 flex justify-between border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50"
+            >
+              <span>No of skipped questions</span>
+              <Tag v-if="getSkippedQuestionsCount() === 0">{{ getSkippedQuestionsCount() }}</Tag>
+              <Tag v-else severity="warn">{{ getSkippedQuestionsCount() }}</Tag>
             </li>
             <li
               class="w-full border-b-2 flex justify-between border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50"
@@ -63,7 +79,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import PrimeDialog from 'primevue/dialog'
 import Knob from 'primevue/knob'
@@ -76,22 +92,41 @@ import { formatMinutes } from '@/helpers'
 
 export default {
   components: { PrimeDialog, Knob, ProgressSpinner, Tag },
-  setup() {
+
+  props: {
+    submissionType: {
+      type: String,
+      required: true
+    },
+    totalQuestions: {
+      type: Number,
+      required: true
+    }
+  },
+  setup(props) {
     const candidatesQuestionnairesStore = useCandidatesQuestionnairesStore()
 
     const showEvaluation = ref(true)
 
     function onModalHide() {
       window.location.href = '/'
-      return
+    }
+
+    function getSkippedQuestionsCount() {
+      return (
+        props.totalQuestions -
+        candidatesQuestionnairesStore.evaluation.attributes.no_of_answered_questions
+      )
     }
 
     return {
+      props,
       showEvaluation,
       candidatesQuestionnairesStore,
       evaluation: computed(() => candidatesQuestionnairesStore.evaluation?.attributes),
       onModalHide,
-      formatMinutes
+      formatMinutes,
+      getSkippedQuestionsCount
     }
   }
 }
