@@ -99,11 +99,27 @@ class Questionnaire extends Model
     // --------------------------------Scopes--------------------------------------------
     public function scopeCompleted(Builder $query, $value): Builder
     {
+        $table = $this->getTable();
+
+        $sub = "(select count(*) from questionnaire_question where questionnaire_question.questionnaire_id = {$table}.id)";
+
         if (Helpers::checkValueIsTrue($value)) {
-            return $query->havingRaw('questions_count = no_of_questions');
+            return $query
+                ->when(config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
+                    return $query->whereRaw("{$sub} = {$table}.no_of_questions");
+                })
+                ->when(!config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
+                    return $query->havingRaw('questions_count = no_of_questions');
+                });
         }
 
-        return $query->havingRaw('questions_count <> no_of_questions');
+        return $query
+            ->when(config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
+                return $query->whereRaw("{$sub} <> {$table}.no_of_questions");
+            })
+            ->when(!config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
+                return $query->havingRaw('questions_count <> no_of_questions');
+            });
     }
 
     // --------------------------------Scopes--------------------------------------------
