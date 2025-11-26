@@ -157,7 +157,7 @@ class Question extends Model implements HasMedia
                 $query
                     ->whereRaw("(select count(*) from question_answer where question_answer.question_id = {$table}.id) = {$table}.no_of_answers");
             })
-            ->when(!config('app.older_db_version_support'), function (Builder $query) {
+            ->when(! config('app.older_db_version_support'), function (Builder $query) {
                 $query->havingRaw('no_of_answers = answers_count');
             });
     }
@@ -172,14 +172,14 @@ class Question extends Model implements HasMedia
                 $query->where('is_answers_type_single', true);
             })
             ->whereHas('categories',
-                fn(Builder $query) => $query->whereIn('categories.id', $questionnaireCategoriesIds));
+                fn (Builder $query) => $query->whereIn('categories.id', $questionnaireCategoriesIds));
     }
 
     // --------------------------------End of scopes-----------------------------
 
     public function checkQuestionIsComplete(Question $question): bool
     {
-        if (!$this->hasAttribute('answers_count')) {
+        if (! $this->hasAttribute('answers_count')) {
             $question->loadCount('answers');
         }
 
