@@ -36,8 +36,6 @@ class EligibleQuestionController extends Controller
     {
         $qIds = $questionnaire->questions()->pluck((new Question)->qualifyColumn('id'));
 
-        // return $qIds->toArray();
-
         $questions = QueryBuilder::for(Question::query())
             ->eligible($questionnaire)
             ->whereNotIn('id', $qIds->toArray())
