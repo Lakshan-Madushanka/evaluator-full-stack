@@ -170,7 +170,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onMounted, onUpdated, reactive, ref, watch } from 'vue'
 
 import { useRoute } from 'vue-router'
 
@@ -183,7 +183,7 @@ import PrimeImage from 'primevue/image'
 import RadioButton from 'primevue/radiobutton'
 import Skeleton from 'primevue/skeleton'
 
-import { findRelations, formatMinutes } from '@/helpers'
+import { findRelations, formatMinutes, highlightSyntax } from '@/helpers'
 
 export default {
   components: {
@@ -211,6 +211,10 @@ export default {
       getQuestionsData()
       getQuestionnaireData()
       getEvaluationData()
+    })
+
+    onUpdated(() => {
+      highlightSyntax()
     })
 
     watch(

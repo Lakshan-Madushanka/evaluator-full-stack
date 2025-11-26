@@ -6,6 +6,9 @@ import colorSchemes from './themes/colorSchemes'
 // Main styles
 import './assets/main.css'
 
+// Other styles
+import 'highlight.js/styles/stackoverflow-light.css'
+
 // Vue
 import App from './App.vue'
 import { createApp } from 'vue'

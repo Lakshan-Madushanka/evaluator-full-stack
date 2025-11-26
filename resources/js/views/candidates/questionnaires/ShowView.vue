@@ -234,8 +234,6 @@ import EvaluationView from '@/views/candidates/questionnaires/EvaluationView.vue
 
 import { findRelations, formatMinutes } from '@/helpers'
 
-import 'highlight.js/styles/stackoverflow-light.css'
-
 export default {
   components: {
     Card,
@@ -286,6 +284,14 @@ export default {
       highlightInlineCode()
     })
 
+    onMounted(() => {
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          submit()
+        }
+      })
+    })
+
     watch(
       () => candidatesQuestionnairesStore.questions,
       (newQuestions) => {
@@ -317,7 +323,7 @@ export default {
         toast.add({
           severity: 'warn',
           summary: `You have only ${warnMessageTime} minutes left`,
-          detail: 'Answewrs are auto submitted after the time limit reached',
+          detail: 'Answers are auto submitted after the time limit reached',
           life: '10000'
         })
       }
@@ -341,8 +347,6 @@ export default {
           questionAnswers[question.id].push(relatedAnswer)
         }
       }
-
-      console.log(questionAnswers)
     }
 
     function onPageChange(event) {
@@ -368,7 +372,7 @@ export default {
     async function navigate(questionNo, questionId) {
       setPaginatorOnNavigation(questionNo)
 
-      await nextTick() // Await until finiish the update
+      await nextTick() // Await until finish the update
 
       // Navigate to question
       let offSetTop = document.getElementById(`${questionId}_card`).offsetTop

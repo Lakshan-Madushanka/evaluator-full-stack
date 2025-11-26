@@ -61,7 +61,7 @@
       <div class="p-4 space-y-4">
         <!-- Questionnaire -->
         <Card
-          v-for="(question, questionIndex) in currrentPageRecords"
+          v-for="(question, questionIndex) in currentPageRecords"
           :id="`${question.id}_card`"
           :key="`question-${question.id}-card`"
         >
@@ -186,7 +186,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onMounted, onUpdated, reactive, ref, watch } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
@@ -203,7 +203,7 @@ import ScrollTop from 'primevue/scrolltop'
 
 import QuestionnaireSkeleton from '@/components/skeletons/QuestionnaireSkeleton.vue'
 
-import { findRelations, formatMinutes } from '@/helpers'
+import { findRelations, formatMinutes, highlightSyntax } from '@/helpers'
 
 export default {
   components: {
@@ -232,7 +232,7 @@ export default {
     let correctAnswers = ref({})
     let cachedCorrectAnswers = {}
 
-    const currrentPageRecords = ref()
+    const currentPageRecords = ref()
     const paginator = { perPage: 10, page: 1, offset: 0 }
 
     onMounted(() => {
@@ -240,12 +240,16 @@ export default {
       getQuestionnaireData()
     })
 
+    onUpdated(() => {
+      highlightSyntax()
+    })
+
     watch(
       () => questionnairesQuestionsStore.questions,
       (newQuestions) => {
         if (newQuestions) {
-          setAnwers(newQuestions)
-          currrentPageRecords.value = getPaginatorRecords()
+          setAnswers(newQuestions)
+          currentPageRecords.value = getPaginatorRecords()
         }
       }
     )
@@ -258,7 +262,7 @@ export default {
       }
     })
 
-    function setAnwers(newQuestions) {
+    function setAnswers(newQuestions) {
       for (let question of newQuestions) {
         questionAnswers[question.id] = []
 
@@ -304,7 +308,7 @@ export default {
       paginator.page = event.page + 1 // paginator start with page 0
       paginator.perPage = event.rows
 
-      currrentPageRecords.value = getPaginatorRecords()
+      currentPageRecords.value = getPaginatorRecords()
     }
 
     function getQuestionNo(index) {
@@ -342,7 +346,7 @@ export default {
     return {
       route,
       router,
-      currrentPageRecords,
+      currentPageRecords,
       questionnairesQuestionsStore,
       questionnairesStore,
       questionnaire: computed(() => questionnairesStore.questionnaire?.data?.attributes),

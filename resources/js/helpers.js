@@ -11,6 +11,8 @@ import { useAppStore } from '@/stores/app'
 
 import ColorSchemes from '@/themes/colorSchemes'
 
+import hljs from 'highlight.js'
+
 export function getBaseUrl() {
   const appStore = useAppStore()
   return appStore.info.base_url
@@ -176,4 +178,22 @@ export function setTheme() {
   const preset = getTheme(appStore.info.preset)
 
   $t().preset(preset).preset(colorScheme).use({ useDefaultOptions: true })
+}
+
+function highlightCodeBlock() {
+  hljs.configure({
+    cssSelector: 'pre '
+  })
+  hljs.highlightAll()
+}
+
+function highlightInlineCode() {
+  hljs.configure({
+    cssSelector: 'code'
+  })
+  hljs.highlightAll()
+}
+export function highlightSyntax() {
+  highlightCodeBlock()
+  highlightInlineCode()
 }

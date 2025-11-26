@@ -63,7 +63,7 @@
       <div class="p-4 space-y-4">
         <!-- Questionnaire -->
         <Card
-          v-for="(question, questionIndex) in currrentPageRecords"
+          v-for="(question, questionIndex) in currentPageRecords"
           :id="`${question.id}_card`"
           :key="`card-${question.id}`"
         >
@@ -210,7 +210,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onMounted, onUpdated, reactive, ref, watch } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
@@ -228,7 +228,7 @@ import ScrollTop from 'primevue/scrolltop'
 
 import QuestionnaireSkeleton from '@/components/skeletons/QuestionnaireSkeleton.vue'
 
-import { arraysHaveSameValues, findRelations, formatMinutes } from '@/helpers'
+import { arraysHaveSameValues, findRelations, formatMinutes, highlightSyntax } from '@/helpers'
 
 export default {
   components: {
@@ -254,7 +254,7 @@ export default {
     let questionAnswers = reactive({})
     let correctAnswers = ref({})
 
-    const currrentPageRecords = ref()
+    const currentPageRecords = ref()
     const paginator = { perPage: 10, page: 1, offset: 0 }
 
     onMounted(() => {
@@ -263,12 +263,16 @@ export default {
       getEvaluationData()
     })
 
+    onUpdated(() => {
+      highlightSyntax()
+    })
+
     watch(
       () => questionnairesQuestionsStore.questions,
       (newQuestions) => {
         if (newQuestions) {
           setAnswers(newQuestions)
-          currrentPageRecords.value = getPaginatorRecords()
+          currentPageRecords.value = getPaginatorRecords()
         }
       }
     )
@@ -322,7 +326,7 @@ export default {
       paginator.page = event.page + 1 // paginator start with page 0
       paginator.perPage = event.rows
 
-      currrentPageRecords.value = getPaginatorRecords()
+      currentPageRecords.value = getPaginatorRecords()
     }
 
     function getQuestionNo(index) {
@@ -380,7 +384,7 @@ export default {
     return {
       route,
       router,
-      currrentPageRecords,
+      currentPageRecords,
       questionnairesQuestionsStore,
       questionnairesStore,
       evaluationsStore,
