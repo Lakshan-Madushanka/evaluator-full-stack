@@ -41,7 +41,8 @@ a,
 
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 7px;
+    height: 5px;
 }
 
 /* Track */
@@ -55,7 +56,7 @@ a,
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #c6c4c4;
+    background: #7e7b7b;
 }
 
 .dark ::-webkit-scrollbar-thumb {
