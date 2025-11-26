@@ -108,7 +108,7 @@ class Questionnaire extends Model
                 ->when(config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
                     return $query->whereRaw("{$sub} = {$table}.no_of_questions");
                 })
-                ->when(!config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
+                ->when(! config('app.older_db_version_support'), function (Builder $query) {
                     return $query->havingRaw('questions_count = no_of_questions');
                 });
         }
@@ -117,7 +117,7 @@ class Questionnaire extends Model
             ->when(config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
                 return $query->whereRaw("{$sub} <> {$table}.no_of_questions");
             })
-            ->when(!config('app.older_db_version_support'), function (Builder $query) use ($sub, $table) {
+            ->when(! config('app.older_db_version_support'), function (Builder $query) {
                 return $query->havingRaw('questions_count <> no_of_questions');
             });
     }
