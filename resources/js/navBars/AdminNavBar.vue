@@ -12,8 +12,7 @@
 <script setup>
 import Breadcrumb from 'primevue/breadcrumb'
 import AuthUserMenu from '@/components/AuthUserMenu.vue'
-import { useRoute } from 'vue-router'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import DarkModeSwitch from '@/components/DarkModeSwitch.vue'
 
@@ -463,7 +462,7 @@ function getItems() {
     case 'admin.images.manager':
       return [
         {
-          label: 'questions',
+          label: window.location.href.includes('questions') ? 'questions' : 'answers',
           command: () => {
             router.push({ name: `admin.${route.params.type}.index` })
           }
