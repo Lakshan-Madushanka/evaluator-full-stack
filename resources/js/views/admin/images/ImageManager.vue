@@ -41,12 +41,13 @@
         container-style="width: 640px; padding: 4px"
       >
         <template #item="slotProps">
-          <img
+          <Image
             :src="slotProps.item.attributes.original_url"
             :alt="slotProps.item.attributes.alt"
             :title="slotProps.item.attributes.name"
-            style="max-width: 100%"
-            class="object-fill"
+            preview
+            imageStyle="max-width: 100%"
+            imageClass="object-fill"
           />
         </template>
         <template #thumbnail="slotProps">
