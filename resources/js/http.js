@@ -19,6 +19,16 @@ export function setInstance() {
   instance.defaults.baseURL = appStore.info.api_v1_url
 }
 
+instance.interceptors.request.use((request) => {
+  if (request.method !== 'get' && request.method !== 'post') {
+    request.data['_method'] = request.method
+
+    request.method = 'post'
+  }
+
+  return request
+})
+
 instance.interceptors.response.use(
   function (response) {
     return response.data ? response.data : response
