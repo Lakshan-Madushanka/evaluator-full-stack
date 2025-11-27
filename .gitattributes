@@ -18,3 +18,6 @@ _ide_helper.php export-ignore
 .phpunit.cache export-ignore
 .vite export-ignore
 api/ export-ignore
+docker-compose.yml export-ignore
+docker/ export-ignore
+.env.testing.docker export-ignore
