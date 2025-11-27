@@ -42,7 +42,7 @@ export const useSetupStore = defineStore('setup', () => {
       is_passed: false
     },
     account: {
-      status: { checkingExistence: false, creating: false },
+      status: { checkingExistence: false, creating: false, created: false },
       errors: {},
       exists: false,
       loading: false,
@@ -232,6 +232,7 @@ export const useSetupStore = defineStore('setup', () => {
 
     try {
       const response = await setupRequests.createAccount(payload)
+      data.account.status.created = true
       data.account.exists = true
       data.account.is_passed = true
       data.account.isLoaded = true

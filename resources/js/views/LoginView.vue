@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth'
+import { useAuthStore } from '@/stores/auth'
 import { useVuelidate } from '@vuelidate/core'
 import { email, required } from '@vuelidate/validators'
 import { reactive } from 'vue'

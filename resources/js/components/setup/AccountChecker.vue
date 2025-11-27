@@ -28,8 +28,14 @@
           <span>Checking account </span>
           <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
         </div>
-        <div v-if="setupStore.data.account.exists" class="space-y-8">
+        <div
+          v-if="setupStore.data.account.exists && !setupStore.data.account.status.created"
+          class="space-y-8"
+        >
           <Message severity="success">Super admin account already exists 🗹</Message>
+        </div>
+        <div v-if="setupStore.data.account.status.created" class="space-y-8">
+          <Message severity="success">Super admin account created successfully 🗹</Message>
         </div>
       </div>
 

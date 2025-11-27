@@ -82,9 +82,9 @@
         <Message v-if="setupStore.data.db.connection.status === 'fail'" severity="error">
           <div class="flex flex-col gap-y-4 items-start">
             <p>Following error occurred during database connection.</p>
-            <Badge severity="danger">
+            <Message severity="secondary">
               {{ setupStore.data.db.connection.errors }}
-            </Badge>
+            </Message>
             <p>
               Please make sure the database connection is working properly, then click the button
               above to continue.

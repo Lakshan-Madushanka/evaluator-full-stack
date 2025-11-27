@@ -12,7 +12,7 @@
         <PrimeButton
           as="a"
           label="Site"
-          href="https://lakm.gitbook.io/evaluator/"
+          href="http://evaluator-site.vercel.app"
           target="_blank"
           rel="noopener"
           severity="info"
@@ -20,7 +20,7 @@
         <PrimeButton
           as="a"
           label="Documentation"
-          href="https://lakm.gitbook.io/evaluator/"
+          href="https://lakm.gitbook.io/evaluator"
           target="_blank"
           rel="noopener"
           severity="info"

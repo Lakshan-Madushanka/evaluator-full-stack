@@ -4,6 +4,7 @@ namespace App\Actions\Setup;
 
 use App\Enums\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class CreateSuperAdminAccountAction
 {
@@ -13,6 +14,7 @@ class CreateSuperAdminAccountAction
             return User::create([
                 ...$inputs,
                 'role' => Role::SUPER_ADMIN,
+                'password' => Hash::make($inputs['password']),
             ]);
         }
 

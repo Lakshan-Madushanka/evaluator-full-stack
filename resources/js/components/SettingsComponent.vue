@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-12" v-if="authStore.user?.role === 'SUPER_ADMIN'">
+  <div class="space-y-12">
     <!--    <header class="flex gap-2 items-center">-->
     <!--      <h1 class="text-3xl font-bold">Settings</h1>-->
     <!--      <i class="pi pi-cog" style="font-size: 2rem"></i>-->
