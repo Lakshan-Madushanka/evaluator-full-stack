@@ -1,66 +1,35 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://i.postimg.cc/zXxCNL58/Untitled.png" width="400" alt="Evaluator Logo"></a></p>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://lakm.gitbook.io/evaluator"><img src="https://img.shields.io/badge/Official%20Site-blue" alt="official site"></a>
+<a href="https://lakm.gitbook.io/evaluator"><img src="https://img.shields.io/badge/Documentation-blue" alt="documentation"></a>
+<a href="https://codecanyon.net/licenses/standard"><img src="https://img.shields.io/badge/License-codecanyon-blue?labelColor=black" alt="license"></a>
+<a href="#"><img src="https://img.shields.io/badge/Version-v1.0.0-blue?labelColor=black" alt="version"></a>
 </p>
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Evaluator is a powerful quiz management system specially designed for internal assessments of companies and institutes by simplifying how you create, deliver, and evaluate multiple-choice quizzes (MCQs). Built with modern interfaces and robust security features, it provides everything you need to run assessments with confidence. With Evaluator, admins can easily create and organize quizzes, while users can securely access and complete them through time-limited, one-time-use codes (without logging). The system also ensures real-time evaluations, offering instant results such as scores, time taken, and answer breakdowns.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+With Evaluator, admins can easily create and organize quizzes, while users can securely access and complete them through time-limited, one-time-use codes. The system also ensures real-time evaluations, offering instant results such as scores, time taken, and answer breakdowns.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Use Cases:
+- Educational Institutions – conduct quizzes, tests, weekly assessments, or practice exams.
+- Corporate Training – assess employee knowledge after training sessions or workshops.
+- Pre-PromotionAssessments – evaluate employees’ skills and competencies before promotions or role changes.
+- Recruitment - evaluate candidates through structured MCQ-based quizzes and skill assessments.
+- Event Management – run fun and engaging quizzes for events, competitions, or team-building activities.
+- Online Coaching & E-Learning Platforms – deliver topic-wise quizzes, mock tests, and learner progress tracking.
+- Certification Programs – create standardized assessments for validating skill levels or course completion.
+- Research & Surveys – collect data through interactive question sets for academic or market research.
+- Customer Engagement – use quizzes for brand engagement, product awareness, or promotional campaigns.
+- Compliance & Policy Training – ensure staff understand policies, safety protocols, or legal requirements.
+- Student Clubs & Communities – organize trivia events, knowledge battles, or club-specific assessments.
+- Whether you need a secure platform for formal evaluations or a flexible tool for interactive assessments, Evaluator has you covered.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Documentation
+Refer the [official documentation site](https://lakm.gitbook.io/evaluator) for comprehensive documentation including installation instructions, user guides, and developer resources.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Evaluator is a licensed product. Please refer to the [Codecanyon License](https://codecanyon.net/licenses/standard) for more details.
