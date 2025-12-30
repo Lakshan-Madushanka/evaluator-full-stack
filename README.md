@@ -1,7 +1,7 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://i.postimg.cc/zXxCNL58/Untitled.png" width="400" alt="Evaluator Logo"></a></p>
 
 <p align="center">
-<a href="https://lakm.gitbook.io/evaluator"><img src="https://img.shields.io/badge/Official%20Site-blue" alt="official site"></a>
+<a href="https://evaluator-site.vercel.app"><img src="https://img.shields.io/badge/Official%20Site-blue" alt="official site"></a>
 <a href="https://lakm.gitbook.io/evaluator"><img src="https://img.shields.io/badge/Documentation-blue" alt="documentation"></a>
 <a href="https://github.com/Lakshan-Madushanka/evaluator-frontend"><img src="https://img.shields.io/badge/Front--End-green" alt="front-end"></a>
 <a href="https://github.com/Lakshan-Madushanka/evaluator-backend"><img src="https://img.shields.io/badge/API-green" alt="API"></a>
