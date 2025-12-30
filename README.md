@@ -5,7 +5,7 @@
 <a href="https://lakm.gitbook.io/evaluator"><img src="https://img.shields.io/badge/Documentation-blue" alt="documentation"></a>
 <a href="https://github.com/Lakshan-Madushanka/evaluator-frontend"><img src="https://img.shields.io/badge/Front--End-green" alt="front-end"></a>
 <a href="https://github.com/Lakshan-Madushanka/evaluator-backend"><img src="https://img.shields.io/badge/API-green" alt="API"></a>
-<a href="https://codecanyon.net/licenses/standard"><img src="https://img.shields.io/badge/License-codecanyon-blue?labelColor=black" alt="license"></a>
+<a href="https://github.com/Lakshan-Madushanka/evaluator-full-stack/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-blue?labelColor=black" alt="license"></a>
 <a href="#"><img src="https://img.shields.io/badge/Version-v1.0.0-blue?labelColor=black" alt="version"></a>
 </p>
 
@@ -34,4 +34,4 @@ Refer the [official documentation site](https://lakm.gitbook.io/evaluator) for c
 
 ## License
 
-Evaluator is a licensed product. Please refer to the [Codecanyon License](https://codecanyon.net/licenses/standard) for more details.
+The MIT License (MIT). Please see [License](https://github.com/Lakshan-Madushanka/evaluator-full-stack/blob/main/LICENSE.md) File for more information.
